@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+
+.canvas{
+  position: absolute;
+  bottom: 0;
+  left: 25vw;
+  width: 900px;
+  height: 315px;
+}
+
+.canvas-design{
+  z-index: 0
+}
+
+.canvas-text{
+  z-index: 1;
+}
+
+.canvas-highlight{
+  z-index: 2;
+}
