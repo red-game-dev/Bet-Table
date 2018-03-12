@@ -727,9 +727,9 @@ class App extends Component {
 		const fontSize = args.FontSize || tableConfig.defaultFontSize;
 		const moveHoriz = (
 			this.currentX + (
-			args.Size.X / 2
+				args.Size.X / 2
 			) - (
-			fontSize / 2
+				fontSize / 2
 			)
 		);
 		const moveVerti = this.currentY + (
@@ -830,27 +830,27 @@ class App extends Component {
 		this.currentX = 0;
 		this.currentRow = 1;
 		this.currentIndex = 0;
-		this.currentMouseX = event.clientX;
-		this.currentMouseY = event.clientY;
 		this.table = document.querySelector('#tableHighlight');
 		this.ctx = this.table.getContext('2d');
 
 		const shapeMapped = this.shapesMap;
 
-		if(Object.keys(shapeMapped).length > 0) {
+		if (Object.keys(shapeMapped).length > 0) {
 			Object.keys(shapeMapped).forEach((curRow, index) => {
 				const shapeWidth = shapeMapped[curRow].Width;
 				const shapeHeight = shapeMapped[curRow].Height;
 				const shapeHorizPos = shapeMapped[curRow].HorzCords;
 				const shapeVertiPos = shapeMapped[curRow].VertiCords;
 				const tableBindings = this.table.getBoundingClientRect();
+				const currentHorizPos = event.clientX - tableBindings.left;
+				const currentVertiPos = event.clientY - tableBindings.top;
 
 
-				if(shapeMapped[curRow].Text == "60") {
+				if (shapeMapped[curRow].Text == "60") {
 					console.log('Text', shapeMapped[curRow].Text,
 					            'X:', tableBindings.x,
 					            'Y', tableBindings.y,
-								'X Still inside ',tableBindings.x, shapeHorizPos + shapeWidth,
+					            'X Still inside ', tableBindings.x, shapeHorizPos + shapeWidth,
 					            'Y Still inside ', tableBindings.y, shapeVertiPos + shapeHeight,
 					            shapeHorizPos,
 					            shapeVertiPos,
@@ -859,17 +859,9 @@ class App extends Component {
 					            this.currentRow
 					)
 				}
+				this.ctx.beginPath();
 
-				if(
-					shapeMapped[curRow].Row == this.currentRow
-
-					&& tableBindings.x <= (shapeHorizPos)
-					&& tableBindings.y <= (shapeVertiPos)
-					||
-					shapeMapped[curRow].Row == this.currentRow
-					&& tableBindings.x <= (shapeHorizPos + shapeWidth)
-					&& tableBindings.y <= (shapeVertiPos + shapeHeight)
-				){
+				if (this.ctx.isPointInPath(currentHorizPos,currentVertiPos)) {
 					this.makeTableHighlightRow(shapeMapped[curRow])
 				}
 			})
@@ -881,7 +873,7 @@ class App extends Component {
 		this.buildTableText();
 	}
 
-	refreshTable(){
+	refreshTable() {
 		this.buildTableDesign();
 		this.buildTableText();
 	}
