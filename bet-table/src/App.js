@@ -5,7 +5,9 @@ import './App.css';
 const tableConfig = {
     defaultBorderSize: 1,
     defaultFontSize: 10,
-    defaultFontFamily: 'Arial, Helvetica, sans-serif'
+    defaultFontFamily: 'Arial, Helvetica, sans-serif',
+	defaultFontThickness: 0,
+	defaultFontWeight: 'normal'
 }
 
 const tableData = {
@@ -753,18 +755,15 @@ class App extends Component {
 
     componentDidMount() {
         this.pixiTableDesign = new PIXI.Application(900, 315);
+	    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
-        //this.pixiTableText = new PIXI.Application();
-        //this.pixiTableHighlight = new PIXI.Application();
         const TableContainer = document.querySelector('#App')
 
         const TableDesign = this.makeCanvas(this.pixiTableDesign, 'tableDesign', ['canvas', 'canvas-design']);
-        //const TableText = this.makeCanvas(this.pixiTableText, 'tableText', ['canvas', 'canvas-text'])
         //const TableHighlight = this.makeCanvas(this.pixiTableHighlight, 'tableHighlight', ['canvas', 'canvas-highlight']);
 
         // Make Design Canvas
         TableContainer.appendChild(TableDesign.view);
-        //TableContainer.appendChild(TableText.view);
         //TableContainer.appendChild(TableHighlight.view);
 
         //TableHighlight.addEventListener('mouseleave', this.refreshTable())
@@ -778,14 +777,18 @@ class App extends Component {
         this.currentIndex += 1;
         const actualWidth = args.Size.X - tableConfig.defaultBorderSize;
         const actualHeight = args.Size.Y - tableConfig.defaultBorderSize;
-        //console.log('Table row - ', args)
+        const fontSize = args.FontSize || tableConfig.defaultFontSize;
+        const fontFamily = args.FontFamily || tableConfig.defaultFontFamily;
+        const fontThickness = args.FontThickness || tableConfig.defaultFontThickness;
+        const fontWeight = args.FontWeight || tableConfig.defaultFontWeight;
+        const borderSize = args.BorderSize || tableConfig.defaultBorderSize;
+	    const textHoriz =  (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
+	    const textVerti = this.currentY + (actualHeight / 2)
 
-        //const rect = new PIXI.Rectangle(this.currentX, this.currentY, args.Size.X, args.Size.Y)
-        //this.pixiTableDesign.stage.addChild(rect);
         const rect = new PIXI.Graphics();
         rect.beginFill('0x' + args.BackColor.replace('#',''), 1);
         // set the line style to have a width of 5 and set the color to red
-        rect.lineStyle(tableConfig.defaultBorderSize, '0x' + args.Border.replace('#',''));
+        rect.lineStyle(borderSize, '0x' + args.Border.replace('#',''));
 
         // draw a rectangle
         // Setup the position of the bunny
@@ -793,108 +796,98 @@ class App extends Component {
 
         rect.endFill();
 
-        this.pixiTableDesign.stage.addChild(rect);
+	    // create a text object with a nice stroke
+	    const shapeText = new PIXI.Text(args.Text, {
+		    fontWeight: fontWeight,
+		    fontSize: fontSize,
+		    fontFamily: fontFamily,
+		    fill: args.TextColor,
+		    align: 'center',
+		    stroke: args.TextColor,
+		    strokeThickness: fontThickness
+	    });
 
-        this.shapesMap[args.Text] = {
-            Text: args.Text,
-            Width: actualWidth,
-            Height: actualHeight,
+	    // setting the anchor point to 0.5 will center align the text... great for spinning!
+	    shapeText.anchor.set(0.5);
+	    shapeText.x = textHoriz;
+	    shapeText.y = textVerti;
+
+
+	    // make the button interactive...
+	    shapeText.interactive = true;
+	    shapeText.buttonMode = true;
+	    rect.interactive = true;
+	    rect.buttonMode = true;
+
+	    let allowAlert = false;
+
+	    rect.on('pointerover', (data) => {
+	    	console.log(data)
+		    allowAlert = !allowAlert;
+		    if(allowAlert){
+			    rect.beginFill('0x' + "4D4DFF".replace('#',''), 1);
+			    // set the line style to have a width of 5 and set the color to red
+			    rect.lineStyle(borderSize, '0x' + args.Border.replace('#',''));
+			    rect.endFill();
+		    	//alert(this.currentY)
+		    }
+	    });
+
+	    shapeText
+	    // Mouse & touch events are normalized into
+	    // the pointer* events for handling different
+	    // button events.
+	    //    .on('pointerdown', alert(this.currentX))
+	    //    .on('pointerup', alert(this.currentX))
+	    //    .on('pointerupoutside', alert(this.currentX))
+		//    .on('pointertap', alert(this.currentX))
+		//    .on('pointerover', alert(this.currentX))
+		    //    .on('pointerout', alert(this.currentX));
+
+		    // Use mouse-only events
+		    // .on('mousedown', onButtonDown)
+		    // .on('mouseup', onButtonUp)
+		    // .on('mouseupoutside', onButtonUp)
+		    //.on('mouseover', alert(this.currentX))
+		    // .on('mouseout', onButtonOut)
+
+		    // Use touch-only events
+		    //.on('touchstart', alert(this.currentX))
+	    // .on('touchend', onButtonUp)
+	    // .on('touchendoutside', onButtonUp)
+
+
+	    this.pixiTableDesign.stage.addChild(rect);
+	    this.pixiTableDesign.stage.addChild(shapeText);
+
+        this.shapesMap[String(args.Text)] = {
+	        Shape: {
+		        Width: actualWidth,
+		        Height: actualHeight,
+		        X: this.currentX,
+		        Y: this.currentY,
+		        RectObj: rect
+	        },
+	        Text: {
+            	String: args.Text,
+		        X: textHoriz,
+		        Y: textVerti,
+		        TextObj: shapeText,
+	        },
             Row: this.currentRow,
-            HorzCords: this.currentX,
-            VertiCords: this.currentY,
-            FontFamily: args.FontFamily || tableConfig.defaultFontFamily,
-            FontSize: args.FontSize || tableConfig.defaultFontSize
+	        Index: this.currentIndex
         }
 
         this.currentX += actualWidth;
 
         if (tableData['MaxPerRow'] == this.currentIndex) {
             this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
-            this.pixiTableDesign.view.setAttribute('height', this.currentY + "px");
+            this.pixiTableDesign.view.setAttribute('height', (this.currentY + (borderSize * tableData['MaxPerRow'])) + "px");
             this.currentRow += 1;
+	        this.currentY += actualHeight;
             this.currentX = 0;
-            this.currentY += actualHeight;
             this.currentIndex = 0;
         }
-    }
-
-    makeTableTextRow(args) {
-        this.currentIndex += 1;
-        //console.log('Table row - Text - ', args)
-
-        const fontFamily = args.FontFamily || tableConfig.defaultFontFamily
-        const fontSize = args.FontSize || tableConfig.defaultFontSize;
-        const moveHoriz = (
-            this.currentX + (
-                args.Size.X / 2
-            ) - (
-                fontSize / 2
-            )
-        );
-        const moveVerti = this.currentY + (
-            args.Size.Y / 2
-        )
-
-        this.ctx.beginPath()
-
-        this.ctx.moveTo(moveHoriz, moveVerti)
-
-        this.ctx.font = fontSize + "px " + fontFamily;
-        this.ctx.fillStyle = args.TextColor;
-        this.ctx.textBaseline = "left";
-        this.ctx.fillText(args.Text, moveHoriz, moveVerti)
-        this.ctx.fill()
-
-        this.ctx.closePath();
-
-        this.currentX += args.Size.X;
-        //this.ctx.arc(args.Size.X, args.Size.Y)
-
-        if (tableData['MaxPerRow'] === this.currentIndex) {
-            this.currentRow += 1;
-            this.currentX = 0;
-            this.currentY += args.Size.Y;
-            this.currentIndex = 0;
-        }
-    }
-
-    makeTableHighlightRow(args) {
-        console.log('Table row - Highlight', args)
-
-
-        const fontFamily = args.FontFamily || tableConfig.defaultFontFamily
-        const fontSize = args.FontSize || tableConfig.defaultFontSize;
-        const moveHoriz = (
-            this.HorzCords + (
-                args.Width / 2
-            ) - (
-                fontSize / 2
-            )
-        );
-        const moveVerti = this.CanvasVertiCords + (
-            args.Height / 2
-        )
-
-        this.ctx.beginPath()
-        // x = left/right if - right, if normal left
-        // y = top/bottom if - bottom, if top left
-
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(args.HorzCords, this.VertiCords,
-            args.Width, args.Height
-        )
-        this.ctx.fill();
-
-
-        this.ctx.moveTo(moveHoriz, moveVerti)
-
-        this.ctx.font = fontSize + "px " + fontFamily;
-        this.ctx.fillStyle = args.TextColor;
-        this.ctx.textBaseline = "left";
-        this.ctx.fillText(args.Text, moveHoriz, moveVerti)
-        this.ctx.fill()
-
-        this.ctx.closePath();
     }
 
     buildTableDesign() {
@@ -907,62 +900,6 @@ class App extends Component {
         Object.keys(tableData['Rows']).forEach((curRow, index) => {
             tableData['Rows'][curRow].map(this.makeTableDesignRow.bind(this))
         })
-    }
-
-    buildTableText() {
-        this.currentY = 0;
-        this.currentX = 0;
-        this.currentRow = 0;
-        this.currentIndex = 0;
-        this.table = document.querySelector('#tableText');
-        this.ctx = this.table.getContext('2d');
-
-        Object.keys(tableData['Rows']).forEach((curRow, index) => {
-            tableData['Rows'][curRow].map(this.makeTableTextRow.bind(this))
-        })
-    }
-
-    buildTableHighlight(event) {
-        this.currentY = 0;
-        this.currentX = 0;
-        this.currentRow = 1;
-        this.currentIndex = 0;
-        this.table = document.querySelector('#tableHighlight');
-        this.ctx = this.table.getContext('2d');
-
-        const shapeMapped = this.shapesMap;
-
-        if (Object.keys(shapeMapped).length > 0) {
-            Object.keys(shapeMapped).forEach((curRow, index) => {
-                const shapeWidth = shapeMapped[curRow].Width;
-                const shapeHeight = shapeMapped[curRow].Height;
-                const shapeHorizPos = shapeMapped[curRow].HorzCords;
-                const shapeVertiPos = shapeMapped[curRow].VertiCords;
-                const tableBindings = this.table.getBoundingClientRect();
-                const currentHorizPos = event.clientX - tableBindings.left;
-                const currentVertiPos = event.clientY - tableBindings.top;
-
-
-                if (shapeMapped[curRow].Text == "60") {
-                    console.log('Text', shapeMapped[curRow].Text,
-                        'X:', tableBindings.x,
-                        'Y', tableBindings.y,
-                        'X Still inside ', tableBindings.x, shapeHorizPos + shapeWidth,
-                        'Y Still inside ', tableBindings.y, shapeVertiPos + shapeHeight,
-                        shapeHorizPos,
-                        shapeVertiPos,
-                        tableBindings,
-                        shapeMapped[curRow].Row,
-                        this.currentRow
-                    )
-                }
-                this.ctx.beginPath();
-
-                if (this.ctx.isPointInPath(currentHorizPos, currentVertiPos)) {
-                    this.makeTableHighlightRow(shapeMapped[curRow])
-                }
-            })
-        }
     }
 
     buildTable() {
