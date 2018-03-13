@@ -2,12 +2,37 @@ import React, {Component} from 'react';
 import * as PIXI from 'pixi.js';
 import './App.css';
 
+
+// Mouse & touch events are normalized into
+// the pointer* events for handling different
+// button events.
+//    .on('pointerdown', alert(this.currentX))
+//    .on('pointerup', alert(this.currentX))
+//    .on('pointerupoutside', alert(this.currentX))
+//    .on('pointertap', () => console.log(this.currentY))
+//    .on('pointerover', alert(this.currentX))
+//    .on('pointerout', alert(this.currentX));
+
+// Use mouse-only events
+// .on('mousedown', onButtonDown)
+// .on('mouseup', onButtonUp)
+// .on('mouseupoutside', onButtonUp)
+//.on('mouseover', alert(this.currentX))
+// .on('mouseout', onButtonOut)
+
+// Use touch-only events
+//.on('touchstart', alert(this.currentX))
+// .on('touchend', onButtonUp)
+// .on('touchendoutside', onButtonUp)
+
 const tableConfig = {
     defaultBorderSize: 1,
     defaultFontSize: 10,
     defaultFontFamily: 'Arial, Helvetica, sans-serif',
-	defaultFontThickness: 0,
-	defaultFontWeight: 'normal'
+    defaultFontThickness: 0,
+    defaultFontWeight: 'normal',
+    defaultHoverBackColor: '#4D4DFF',
+    defaultHoverBorderColor: '#4D4DFF',
 }
 
 const tableData = {
@@ -754,23 +779,56 @@ class App extends Component {
     }
 
     componentDidMount() {
+        this.allowAlert = false;
         this.pixiTableDesign = new PIXI.Application(900, 315);
-	    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         const TableContainer = document.querySelector('#App')
 
         const TableDesign = this.makeCanvas(this.pixiTableDesign, 'tableDesign', ['canvas', 'canvas-design']);
-        //const TableHighlight = this.makeCanvas(this.pixiTableHighlight, 'tableHighlight', ['canvas', 'canvas-highlight']);
 
         // Make Design Canvas
         TableContainer.appendChild(TableDesign.view);
-        //TableContainer.appendChild(TableHighlight.view);
-
-        //TableHighlight.addEventListener('mouseleave', this.refreshTable())
-        //TableHighlight.addEventListener('mousemove', this.buildTableHighlight())
-        //TableHighlight.addEventListener('click', this.buildTableHighlight())
 
         this.buildTable();
+    }
+
+    getChipValue() {
+        return this.chipValue;
+    }
+
+    setChipValue(chipValue) {
+        this.chipValue = chipValue;
+    }
+
+    onShapeHoverIN(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
+
+        Shape.beginFill(shapeMap.Shape.HoverBackColor, 1);
+        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+    }
+
+    onShapeHoverOUT(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
+
+        Shape.beginFill(shapeMap.Shape.NormalBackColor, 1);
+        Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+    }
+
+    onShapeClick(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
+
+        Shape.beginFill(shapeMap.Shape.HoverBackColor, 1);
+        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
     }
 
     makeTableDesignRow(args) {
@@ -782,109 +840,95 @@ class App extends Component {
         const fontThickness = args.FontThickness || tableConfig.defaultFontThickness;
         const fontWeight = args.FontWeight || tableConfig.defaultFontWeight;
         const borderSize = args.BorderSize || tableConfig.defaultBorderSize;
-	    const textHoriz =  (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
-	    const textVerti = this.currentY + (actualHeight / 2)
+        const hoverBackColor = args.HoverBackColor || tableConfig.defaultHoverBackColor;
+        const hoverBorderColor = args.HoverBorderColor || tableConfig.defaultHoverBorderColor;
 
-        const rect = new PIXI.Graphics();
-        rect.beginFill('0x' + args.BackColor.replace('#',''), 1);
-        // set the line style to have a width of 5 and set the color to red
-        rect.lineStyle(borderSize, '0x' + args.Border.replace('#',''));
-
-        // draw a rectangle
-        // Setup the position of the bunny
-        rect.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
-
-        rect.endFill();
-
-	    // create a text object with a nice stroke
-	    const shapeText = new PIXI.Text(args.Text, {
-		    fontWeight: fontWeight,
-		    fontSize: fontSize,
-		    fontFamily: fontFamily,
-		    fill: args.TextColor,
-		    align: 'center',
-		    stroke: args.TextColor,
-		    strokeThickness: fontThickness
-	    });
-
-	    // setting the anchor point to 0.5 will center align the text... great for spinning!
-	    shapeText.anchor.set(0.5);
-	    shapeText.x = textHoriz;
-	    shapeText.y = textVerti;
-
-
-	    // make the button interactive...
-	    shapeText.interactive = true;
-	    shapeText.buttonMode = true;
-	    rect.interactive = true;
-	    rect.buttonMode = true;
-
-	    let allowAlert = false;
-
-	    rect.on('pointerover', (data) => {
-	    	console.log(data)
-		    allowAlert = !allowAlert;
-		    if(allowAlert){
-			    rect.beginFill('0x' + "4D4DFF".replace('#',''), 1);
-			    // set the line style to have a width of 5 and set the color to red
-			    rect.lineStyle(borderSize, '0x' + args.Border.replace('#',''));
-			    rect.endFill();
-		    	//alert(this.currentY)
-		    }
-	    });
-
-	    shapeText
-	    // Mouse & touch events are normalized into
-	    // the pointer* events for handling different
-	    // button events.
-	    //    .on('pointerdown', alert(this.currentX))
-	    //    .on('pointerup', alert(this.currentX))
-	    //    .on('pointerupoutside', alert(this.currentX))
-		//    .on('pointertap', alert(this.currentX))
-		//    .on('pointerover', alert(this.currentX))
-		    //    .on('pointerout', alert(this.currentX));
-
-		    // Use mouse-only events
-		    // .on('mousedown', onButtonDown)
-		    // .on('mouseup', onButtonUp)
-		    // .on('mouseupoutside', onButtonUp)
-		    //.on('mouseover', alert(this.currentX))
-		    // .on('mouseout', onButtonOut)
-
-		    // Use touch-only events
-		    //.on('touchstart', alert(this.currentX))
-	    // .on('touchend', onButtonUp)
-	    // .on('touchendoutside', onButtonUp)
-
-
-	    this.pixiTableDesign.stage.addChild(rect);
-	    this.pixiTableDesign.stage.addChild(shapeText);
-
-        this.shapesMap[String(args.Text)] = {
-	        Shape: {
-		        Width: actualWidth,
-		        Height: actualHeight,
-		        X: this.currentX,
-		        Y: this.currentY,
-		        RectObj: rect
-	        },
-	        Text: {
-            	String: args.Text,
-		        X: textHoriz,
-		        Y: textVerti,
-		        TextObj: shapeText,
-	        },
-            Row: this.currentRow,
-	        Index: this.currentIndex
+        const shapeStr = args.Text || "";
+        const textHoriz = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
+        const textVerti = this.currentY + (actualHeight / 2)
+        const textConfig = {
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            fontFamily: fontFamily,
+            fill: args.TextColor,
+            align: 'center',
+            stroke: args.TextColor,
+            strokeThickness: fontThickness
         }
 
+        const Shape = new PIXI.Graphics();
+        const shapeText = new PIXI.Text(shapeStr, textConfig);
+
+        // Make Shape
+        Shape.beginFill('0x' + args.BackColor.replace('#', ''), 1);
+        Shape.lineStyle(borderSize, '0x' + args.Border.replace('#', ''));
+        Shape.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
+        Shape.endFill();
+
+        // Make Text inside shape
+        shapeText.anchor.set(0.5);
+        shapeText.x = textHoriz;
+        shapeText.y = textVerti;
+
+
+        // Create Interactivity
+        shapeText.interactive = true;
+        shapeText.buttonMode = true;
+        Shape.interactive = true;
+        Shape.buttonMode = true;
+
+
+        // Event Handlers
+        Shape
+            .on('pointerover', this.onShapeHoverIN.bind(this));
+        shapeText
+            .on('pointerover', this.onShapeHoverIN.bind(this));
+
+        Shape
+            .on('pointerout', this.onShapeHoverOUT.bind(this));
+        shapeText
+            .on('pointerout', this.onShapeHoverOUT.bind(this));
+
+        this.pixiTableDesign.stage.addChild(Shape);
+        this.pixiTableDesign.stage.addChild(shapeText);
+
+        // This is required to map all shapes
+        this.shapesMap[String(args.Text)] = {
+            Shape: {
+                Width: actualWidth,
+                Height: actualHeight,
+                X: this.currentX,
+                Y: this.currentY,
+                NormalBorderSize: borderSize,
+                NormalBorderColor: '0x' + args.Border.replace('#', ''),
+                NormalBackColor: '0x' + args.BackColor.replace('#', ''),
+                HoverBorderSize: borderSize,
+                HoverBackColor: '0x' + hoverBackColor.replace('#', ''),
+                HoverBorderColor: '0x' + hoverBorderColor.replace('#', ''),
+                Graphic: Shape
+            },
+            Text: {
+                String: shapeStr,
+                X: textHoriz,
+                Y: textVerti,
+                TextObj: shapeText,
+            },
+            Row: this.currentRow,
+            Index: this.currentIndex
+        }
+
+        // This is required to access it on event handler
+        Shape.shapeMap = this.shapesMap[String(args.Text)];
+        shapeText.shapeMap = this.shapesMap[String(args.Text)];
+
+        // Next X cord ->
         this.currentX += actualWidth;
 
         if (tableData['MaxPerRow'] == this.currentIndex) {
             this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
             this.pixiTableDesign.view.setAttribute('height', (this.currentY + (borderSize * tableData['MaxPerRow'])) + "px");
             this.currentRow += 1;
-	        this.currentY += actualHeight;
+            this.currentY += actualHeight;
             this.currentX = 0;
             this.currentIndex = 0;
         }
@@ -903,6 +947,7 @@ class App extends Component {
     }
 
     buildTable() {
+        this.setChipValue(100);
         this.buildTableDesign();
         //this.buildTableText();
     }
@@ -921,8 +966,7 @@ class App extends Component {
 
     render() {
         return (
-            <div id="App" className="App">
-            </div>
+            <div id="App" className="App"></div>
         );
     }
 }
