@@ -12,6 +12,10 @@
     "1000": "./goz.png",
     "defaultChip": "./goz.png"
   },
+  "ChipConfig":{
+    "Width": 29.5,
+    "Height": 29.5
+  },
   "ChipTextConfig": {
     "defaultWeight": "normal",
     "defaultSize": 12,

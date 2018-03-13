@@ -26,7 +26,6 @@ import './App.css';
 // .on('touchend', onButtonUp)
 // .on('touchendoutside', onButtonUp)
 
-
 // WHAT IS LEFT
 // 1. Highlight specific shape and highlight other shapes
 // 2. Place Bets on more parts on each slot
@@ -52,7 +51,7 @@ class App extends Component {
     //================================
 
     componentDidMount() {
-        this.pixiTableDesign     = new PIXI.Application(900, 350);
+        this.pixiTableDesign     = new PIXI.Application(900, 295);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         const TableContainer = document.querySelector('#App')
@@ -70,11 +69,11 @@ class App extends Component {
     //================================
 
     getChipAmountMap(key) {
-        return this.chipAmountMap[String(key)];
+        return this.chipAmountMap[String(key).replace(' ', '_')];
     }
 
     setCipAmountMap(key, list) {
-        this.chipAmountMap[String(key)] = list;
+        this.chipAmountMap[String(key).replace(' ', '_')] = list;
     }
 
     getChipValue() {
@@ -86,11 +85,11 @@ class App extends Component {
     }
 
     getShapesMap(key) {
-        return this.shapesMap[String(key)];
+        return this.shapesMap[String(key).replace(' ', '_')];
     }
 
     setShapeMap(key, list) {
-        this.shapesMap[String(key)] = list;
+        this.shapesMap[String(key).replace(' ', '_')] = list;
     }
 
     getBetHistory(key) {
@@ -214,10 +213,10 @@ class App extends Component {
             strokeThickness: fontThickness
         })
 
-        const chipWidth  = shapeMap.Shape.Width / 2;
-        const chipHeight = shapeMap.Shape.Height / 2
-        const chipX      = shapeMap.Shape.X + chipWidth;
-        const chipY      = shapeMap.Shape.Y + chipHeight;
+        const chipWidth  = chipData.ChipConfig && chipData.ChipConfig.Width ? chipData.ChipConfig.Width : shapeMap.Shape.Width / 2;
+        const chipHeight = chipData.ChipConfig && chipData.ChipConfig.Height ? chipData.ChipConfig.Height : shapeMap.Shape.Height / 2
+        const chipX      = shapeMap.Shape.X + (shapeMap.Shape.Width / 2);
+        const chipY      = shapeMap.Shape.Y + (shapeMap.Shape.Height / 2);
 
         if (chipModel && chipMapped.Amount > 0) {
             chipModel.image = PIXI.Sprite.fromImage(chipPath)
@@ -276,10 +275,9 @@ class App extends Component {
         const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
         // CALL BACKS
         // * Can use default callbacks or your own!
-        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeClick;
+        const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeClick;
         const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.onShapeHoverIN;
-        const hoverOUTCallBack  = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeHoverOUT;
-
+        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeHoverOUT;
 
         const shapeStr   = args.Text || "";
         const textHoriz  = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
@@ -318,7 +316,6 @@ class App extends Component {
         shapeText.buttonMode  = true;
         Shape.interactive     = true;
         Shape.buttonMode      = true;
-
 
         // Event Handlers
         Shape
@@ -371,12 +368,12 @@ class App extends Component {
 
         // Next X cord ->
         this.currentX += actualWidth;
-
-        if (tableData['MaxPerRow'] == this.currentIndex) {
+        if (tableData['MaxPerRow'][String(this.currentRow)] == this.currentIndex) {
             this.currentY += actualHeight;
+            console.log(tableData['MaxPerRow'][String(this.currentRow)])
 
             this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
-            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * tableData['MaxPerRow'])) + "px");
+            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * tableData['MaxPerRow'][String(this.currentRow)])) + "px");
             this.currentRow += 1;
             this.currentX     = 0;
             this.currentIndex = 0;
@@ -390,7 +387,7 @@ class App extends Component {
     buildTable() {
         this.currentY      = 0;
         this.currentX      = 0;
-        this.currentRow    = 0;
+        this.currentRow    = 1;
         this.currentIndex  = 0;
         this.shapesMap     = {};
         this.betHistory    = [];
