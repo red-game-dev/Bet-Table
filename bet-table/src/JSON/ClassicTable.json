@@ -23,7 +23,7 @@
         "TextColor": "white",
         "Border": "#f9fbf5",
         "Events": {
-          "Click": "onShapeClick"
+          "Click": "onShapeBetClick"
         },
         "Size": {
           "Y": 60,

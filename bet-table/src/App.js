@@ -158,7 +158,7 @@ class App extends Component {
     // CANVAS HANDLERS
     //================================
 
-    onShapeHoverIN(event) {
+    onShapeBetHoverIN(event) {
         const shapeMap = event.currentTarget.shapeMap;
         const Shape    = shapeMap.Shape.Graphic;
 
@@ -168,7 +168,7 @@ class App extends Component {
         Shape.endFill();
     }
 
-    onShapeHoverOUT(event) {
+    onShapeBetHoverOUT(event) {
         const shapeMap = event.currentTarget.shapeMap;
         const Shape    = shapeMap.Shape.Graphic;
 
@@ -178,7 +178,7 @@ class App extends Component {
         Shape.endFill();
     }
 
-    onShapeClick(event) {
+    onShapeBetClick(event) {
         if (!this.getChipValue()) {
             return;
         }
@@ -275,9 +275,9 @@ class App extends Component {
         const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
         // CALL BACKS
         // * Can use default callbacks or your own!
-        const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeClick;
-        const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.onShapeHoverIN;
-        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeHoverOUT;
+        const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeBetClick;
+        const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.onShapeBetHoverIN;
+        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeBetHoverOUT;
 
         const shapeStr   = args.Text || "";
         const textHoriz  = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
