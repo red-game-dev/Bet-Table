@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import tableData from './JSON/ClassicTable';
+import chipData from './JSON/Chips'
 import * as PIXI from 'pixi.js';
 import './App.css';
-
 
 // Mouse & touch events are normalized into
 // the pointer* events for handling different
@@ -25,762 +26,25 @@ import './App.css';
 // .on('touchend', onButtonUp)
 // .on('touchendoutside', onButtonUp)
 
-const tableConfig = {
-    defaultBorderSize: 1,
-    defaultFontSize: 10,
-    defaultFontFamily: 'Arial, Helvetica, sans-serif',
-    defaultFontThickness: 0,
-    defaultFontWeight: 'normal',
-    defaultHoverBackColor: '#4D4DFF',
-    defaultHoverBorderColor: '#4D4DFF',
-}
-
-const tableData = {
-    'MaxPerRow': 12,
-    'Rows': {
-        1: [
-            {
-                'Text': '1',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#f9fbf5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '2',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '3',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '4',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '5',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '6',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '7',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '8',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '9',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '10',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '11',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '12',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ],
-        2: [
-            {
-                'Text': '13',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '14',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '15',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '16',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '17',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '18',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '19',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '20',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '21',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '22',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '23',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '24',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ],
-        3: [
-            {
-                'Text': '25',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '26',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '27',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '28',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '29',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '30',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '31',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '32',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '33',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '34',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '35',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '36',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ],
-        4: [
-            {
-                'Text': '37',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '38',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '39',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '40',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '41',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '42',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '43',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '44',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '45',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '46',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '47',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '48',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ],
-        5: [
-            {
-                'Text': '49',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '2',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '50',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '51',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '52',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '53',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '54',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '55',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '56',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '57',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '58',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '59',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ],
-        6: [
-            {
-                'Text': '60',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '61',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '62',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '63',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '64',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '65',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '66',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '67',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '68',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '69',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '70',
-                'BackColor': '#181818',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            },
-            {
-                'Text': '71',
-                'BackColor': '#F22E1A',
-                'TextColor': 'white',
-                'Border': '#F9FBF5',
-                'Size': {
-                    'Y': 60,
-                    'X': 60,
-                }
-            }
-        ]
-    }
-}
-
 class App extends Component {
+
+    //================================
+    // __INIT__ / void main()
+    //================================
+
     constructor(props) {
         super(props)
+
+        this.chipAmountMap = {}
+        this.betHistory    = [];
     }
 
+    //================================
+    // REACT COMPONENTS
+    //================================
+
     componentDidMount() {
-        this.allowAlert = false;
-        this.pixiTableDesign = new PIXI.Application(900, 315);
+        this.pixiTableDesign     = new PIXI.Application(900, 315);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         const TableContainer = document.querySelector('#App')
@@ -793,6 +57,18 @@ class App extends Component {
         this.buildTable();
     }
 
+    //================================
+    // GETTERS Obj; AND SETTERS Obj;
+    //================================
+
+    getChipAmountMap(key) {
+        return this.chipAmountMap[String(key)];
+    }
+
+    setCipAmountMap(key, list) {
+        this.chipAmountMap[String(key)] = list;
+    }
+
     getChipValue() {
         return this.chipValue;
     }
@@ -801,11 +77,85 @@ class App extends Component {
         this.chipValue = chipValue;
     }
 
+    getShapesMap(key) {
+        return this.shapesMap[String(key)];
+    }
+
+    setShapeMap(key, list) {
+        this.shapesMap[String(key)] = list;
+    }
+
+    getBetHistory(key) {
+        return this.betHistory[key];
+    }
+
+    setBetHistory(list) {
+        this.betHistory.push(list)
+    }
+
+    //========================
+    // EXTERNAL FUNCTIONALITIES
+    //========================
+
+    undoBets() {
+        const lastBet = this.getBetHistory(this.betHistory.length - 1)
+
+        if (lastBet) {
+            const universalKey      = lastBet.MapKey;
+            const shapeMapped       = this.getShapesMap(universalKey)
+            const chipText          = shapeMapped.Chip.ChipText;
+            const chipModel         = shapeMapped.Chip.ChipModel;
+            const currentBetAmount  = Number(chipText.text);
+            const previousBetAmount = currentBetAmount - lastBet.Amount;
+
+            if (chipText && chipModel) {
+
+                if (previousBetAmount > 0) {
+                    const path     = chipData.ChipPaths[String(previousBetAmount)];
+                    const chipPath = path ? path : chipData.ChipPaths.defaultChip;
+
+                    chipModel.image = PIXI.Sprite.fromImage(chipPath);
+                    chipText.text   = previousBetAmount;
+
+                    this.setCipAmountMap(universalKey, {
+                        Amount: previousBetAmount
+                    })
+                } else {
+                    if (chipModel) {
+                        chipModel.destroy()
+                    }
+                    if (chipText) {
+                        chipText.destroy();
+                    }
+
+                    const newShapeMapped = Object.assign(this.getShapesMap(universalKey).Chip, {});
+                    this.setShapeMap(universalKey, newShapeMapped)
+                    this.setCipAmountMap(universalKey, {
+                        Amount: 0
+                    })
+                }
+            }
+
+            const getIndex = this.betHistory.indexOf(lastBet)
+            if (getIndex > -1) {
+                this.betHistory.splice(getIndex, 1);
+            }
+        }
+    }
+
+    clearBets() {
+        this.refreshTable();
+    }
+
+    //================================
+    // CANVAS HANDLERS
+    //================================
+
     onShapeHoverIN(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
+        const Shape    = shapeMap.Shape.Graphic;
 
-        Shape.beginFill(shapeMap.Shape.HoverBackColor, 1);
+        Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
         Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
         Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
         Shape.endFill();
@@ -813,54 +163,133 @@ class App extends Component {
 
     onShapeHoverOUT(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
+        const Shape    = shapeMap.Shape.Graphic;
 
-        Shape.beginFill(shapeMap.Shape.NormalBackColor, 1);
+        Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
         Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
         Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
         Shape.endFill();
     }
 
     onShapeClick(event) {
+        if (!this.getChipValue()) {
+            return;
+        }
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
+        const Shape    = shapeMap.Shape.Graphic;
 
-        Shape.beginFill(shapeMap.Shape.HoverBackColor, 1);
-        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
-        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-        Shape.endFill();
+        const fontWeight    = chipData.ChipTextConfig.defaultWeight;
+        const fontSize      = chipData.ChipTextConfig.defaultSize;
+        const fontFamily    = chipData.ChipTextConfig.defaultFamily;
+        const fontColor     = chipData.ChipTextConfig.defaultColor;
+        const fontStroke    = chipData.ChipTextConfig.defaultStroke;
+        const fontThickness = chipData.ChipTextConfig.defaultThickness;
+
+        const universalKey = String(shapeMap.Text.String);
+        const chipMapped   = this.getChipAmountMap(universalKey);
+
+        const chipAmount    = this.getChipValue();
+        // increase chip amount
+        const chipNewAmount = chipMapped.Amount + chipAmount;
+
+        const path     = chipData.ChipPaths[String(chipNewAmount)];
+        const chipPath = path ? path : chipData.ChipPaths.defaultChip;
+
+        const chipModel = shapeMap.Chip ? shapeMap.Chip.ChipModel : PIXI.Sprite.fromImage(chipPath);
+        const chipText  = shapeMap.Chip ? shapeMap.Chip.ChipText : new PIXI.Text(String(chipAmount), {
+            fontWeight:      fontWeight,
+            fontSize:        fontSize,
+            fontFamily:      fontFamily,
+            fill:            fontColor,
+            align:           'center',
+            stroke:          fontStroke,
+            strokeThickness: fontThickness
+        })
+
+        const chipWidth  = shapeMap.Shape.Width / 2;
+        const chipHeight = shapeMap.Shape.Height / 2
+        const chipX      = shapeMap.Shape.X + chipWidth;
+        const chipY      = shapeMap.Shape.Y + chipHeight;
+
+        if (chipModel && chipMapped.Amount > 0) {
+            chipModel.image = PIXI.Sprite.fromImage(chipPath)
+            chipText.text   = chipNewAmount;
+        } else {
+            chipModel.anchor.set(0.5)
+            chipText.anchor.set(0.5);
+
+            // ADD CHIP
+            chipModel.width  = chipWidth
+            chipModel.height = chipHeight
+            chipModel.x      = chipX;
+            chipModel.y      = chipY;
+
+            chipText.x = chipX
+            chipText.y = chipY
+
+            this.pixiTableDesign.stage.addChild(chipModel, chipText);
+        }
+
+        const newShapeMapped = Object.assign(this.getShapesMap(universalKey), {
+            Chip: {
+                ChipModel: chipModel,
+                ChipText:  chipText
+            }
+        });
+
+        this.setShapeMap(universalKey, newShapeMapped)
+
+        this.setBetHistory({
+            MapKey: String(universalKey),
+            Amount: chipAmount
+        })
+
+        this.setCipAmountMap(String(universalKey), {
+            Amount: chipNewAmount
+        })
     }
 
-    makeTableDesignRow(args) {
-        this.currentIndex += 1;
-        const actualWidth = args.Size.X - tableConfig.defaultBorderSize;
-        const actualHeight = args.Size.Y - tableConfig.defaultBorderSize;
-        const fontSize = args.FontSize || tableConfig.defaultFontSize;
-        const fontFamily = args.FontFamily || tableConfig.defaultFontFamily;
-        const fontThickness = args.FontThickness || tableConfig.defaultFontThickness;
-        const fontWeight = args.FontWeight || tableConfig.defaultFontWeight;
-        const borderSize = args.BorderSize || tableConfig.defaultBorderSize;
-        const hoverBackColor = args.HoverBackColor || tableConfig.defaultHoverBackColor;
-        const hoverBorderColor = args.HoverBorderColor || tableConfig.defaultHoverBorderColor;
+    //======================================
+    // CANVAS ITEM - CREATE SHAPE WITH TEXT
+    //======================================
 
-        const shapeStr = args.Text || "";
-        const textHoriz = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
-        const textVerti = this.currentY + (actualHeight / 2)
+    makeTableItem(args) {
+        this.currentIndex += 1;
+        const actualWidth      = args.Size.X - tableData.defaultBorderSize;
+        const actualHeight     = args.Size.Y - tableData.defaultBorderSize;
+        const fontSize         = args.FontSize || tableData.defaultFontSize;
+        const fontFamily       = args.FontFamily || tableData.defaultFontFamily;
+        const fontThickness    = args.FontThickness || tableData.defaultFontThickness;
+        const fontWeight       = args.FontWeight || tableData.defaultFontWeight;
+        const borderSize       = args.BorderSize || tableData.defaultBorderSize;
+        const normalAlpha      = args.BackColorAlpha || tableData.defaultBackColorAlpha;
+        const hoverBackColor   = args.HoverBackColor || tableData.defaultHoverBackColor;
+        const hoverBorderColor = args.HoverBorderColor || tableData.defaultHoverBorderColor;
+        const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
+
+        const shapeStr   = args.Text || "";
+        const textHoriz  = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
+        const textVerti  = this.currentY + (actualHeight / 2)
         const textConfig = {
-            fontWeight: fontWeight,
-            fontSize: fontSize,
-            fontFamily: fontFamily,
-            fill: args.TextColor,
-            align: 'center',
-            stroke: args.TextColor,
+            fontWeight:      fontWeight,
+            fontSize:        fontSize,
+            fontFamily:      fontFamily,
+            fill:            args.TextColor,
+            align:           'center',
+            stroke:          args.TextColor,
             strokeThickness: fontThickness
         }
 
-        const Shape = new PIXI.Graphics();
+        // SET Chip Map
+        this.setCipAmountMap(shapeStr, {
+            Amount: 0
+        });
+
+        const Shape     = new PIXI.Graphics();
         const shapeText = new PIXI.Text(shapeStr, textConfig);
 
         // Make Shape
-        Shape.beginFill('0x' + args.BackColor.replace('#', ''), 1);
+        Shape.beginFill('0x' + args.BackColor.replace('#', ''), normalAlpha);
         Shape.lineStyle(borderSize, '0x' + args.Border.replace('#', ''));
         Shape.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
         Shape.endFill();
@@ -870,13 +299,11 @@ class App extends Component {
         shapeText.x = textHoriz;
         shapeText.y = textVerti;
 
-
         // Create Interactivity
         shapeText.interactive = true;
-        shapeText.buttonMode = true;
-        Shape.interactive = true;
-        Shape.buttonMode = true;
-
+        shapeText.buttonMode  = true;
+        Shape.interactive     = true;
+        Shape.buttonMode      = true;
 
         // Event Handlers
         Shape
@@ -889,37 +316,43 @@ class App extends Component {
         shapeText
             .on('pointerout', this.onShapeHoverOUT.bind(this));
 
-        this.pixiTableDesign.stage.addChild(Shape);
-        this.pixiTableDesign.stage.addChild(shapeText);
+        Shape
+            .on('pointertap', this.onShapeClick.bind(this))
+        shapeText
+            .on('pointertap', this.onShapeClick.bind(this))
+
+        this.pixiTableDesign.stage.addChild(Shape, shapeText);
 
         // This is required to map all shapes
-        this.shapesMap[String(args.Text)] = {
+        this.setShapeMap(args.Text, {
             Shape: {
-                Width: actualWidth,
-                Height: actualHeight,
-                X: this.currentX,
-                Y: this.currentY,
-                NormalBorderSize: borderSize,
-                NormalBorderColor: '0x' + args.Border.replace('#', ''),
-                NormalBackColor: '0x' + args.BackColor.replace('#', ''),
-                HoverBorderSize: borderSize,
-                HoverBackColor: '0x' + hoverBackColor.replace('#', ''),
-                HoverBorderColor: '0x' + hoverBorderColor.replace('#', ''),
-                Graphic: Shape
+                Width:                actualWidth,
+                Height:               actualHeight,
+                X:                    this.currentX,
+                Y:                    this.currentY,
+                NormalBorderSize:     borderSize,
+                NormalBorderColor:    '0x' + args.Border.replace('#', ''),
+                NormalBackColor:      '0x' + args.BackColor.replace('#', ''),
+                NornalBackColorAlpha: normalAlpha,
+                HoverBorderSize:      borderSize,
+                HoverBackColor:       '0x' + hoverBackColor.replace('#', ''),
+                HoverBackColorAlpha:  hoverAlpha,
+                HoverBorderColor:     '0x' + hoverBorderColor.replace('#', ''),
+                Graphic:              Shape
             },
-            Text: {
-                String: shapeStr,
-                X: textHoriz,
-                Y: textVerti,
+            Text:  {
+                String:  shapeStr,
+                X:       textHoriz,
+                Y:       textVerti,
                 TextObj: shapeText,
             },
-            Row: this.currentRow,
+            Row:   this.currentRow,
             Index: this.currentIndex
-        }
+        })
 
         // This is required to access it on event handler
-        Shape.shapeMap = this.shapesMap[String(args.Text)];
-        shapeText.shapeMap = this.shapesMap[String(args.Text)];
+        Shape.shapeMap     = this.getShapesMap(args.Text);
+        shapeText.shapeMap = this.getShapesMap(args.Text);
 
         // Next X cord ->
         this.currentX += actualWidth;
@@ -929,34 +362,41 @@ class App extends Component {
             this.pixiTableDesign.view.setAttribute('height', (this.currentY + (borderSize * tableData['MaxPerRow'])) + "px");
             this.currentRow += 1;
             this.currentY += actualHeight;
-            this.currentX = 0;
+            this.currentX     = 0;
             this.currentIndex = 0;
         }
     }
 
-    buildTableDesign() {
-        this.currentY = 0;
-        this.currentX = 0;
-        this.currentRow = 0;
-        this.currentIndex = 0;
-        this.shapesMap = {};
+    //======================================
+    // BUILD TABLE >>
+    //======================================
+
+    buildTable() {
+        this.currentY      = 0;
+        this.currentX      = 0;
+        this.currentRow    = 0;
+        this.currentIndex  = 0;
+        this.shapesMap     = {};
+        this.betHistory    = [];
+        this.chipAmountMap = {};
+
+        this.setChipValue(100);
 
         Object.keys(tableData['Rows']).forEach((curRow, index) => {
-            tableData['Rows'][curRow].map(this.makeTableDesignRow.bind(this))
+            tableData['Rows'][curRow].map(this.makeTableItem.bind(this))
         })
     }
 
-    buildTable() {
-        this.setChipValue(100);
-        this.buildTableDesign();
-        //this.buildTableText();
-    }
-
+    //======================================
+    // REFRSH TABLE
+    //======================================
     refreshTable() {
-        this.buildTableDesign();
-        //this.buildTableText();
+        this.buildTable();
     }
 
+    //======================================
+    // MAKE CANVAS (U CAN CREATE MORE THAN 1)
+    //======================================
     makeCanvas(app, canvasId, canvasClassList) {
         app.view.setAttribute('id', canvasId)
         canvasClassList.map(className => app.view.classList.add(className))
@@ -964,12 +404,18 @@ class App extends Component {
         return app;
     }
 
+    //======================================
+    // RENDER IT
+    //======================================
+
     render() {
         return (
-            <div id="App" className="App"></div>
+            <div id="App" className="App">
+                <div className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</div>
+                <div className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</div>
+            </div>
         );
     }
 }
-
 
 export default App;

@@ -1,0 +1,23 @@
+{
+  "ChipPaths": {
+    "100": "./goz.png",
+    "200": "./goz.png",
+    "300": "./goz.png",
+    "400": "./goz.png",
+    "500": "./goz.png",
+    "600": "./goz.png",
+    "700": "./goz.png",
+    "800": "./goz.png",
+    "900": "./goz.png",
+    "1000": "./goz.png",
+    "defaultChip": "./goz.png"
+  },
+  "ChipTextConfig": {
+    "defaultWeight": "normal",
+    "defaultSize": 12,
+    "defaultFamily": "Arial, Helvetica, sans-serif",
+    "defaultColor": "#f9fbf5",
+    "defaultStroke": "#f9fbf5",
+    "defaultThickness": 0
+  }
+}
