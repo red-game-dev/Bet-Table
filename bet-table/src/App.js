@@ -26,6 +26,14 @@ import './App.css';
 // .on('touchend', onButtonUp)
 // .on('touchendoutside', onButtonUp)
 
+
+// WHAT IS LEFT
+// 1. Highlight specific shape and highlight other shapes
+// 2. Place Bets on more parts on each slot
+// 3. Make the table look the same as origianl (Introducing Also Assets on Background, only if it has)
+// 4. Use real chips for test
+// 5. Refactor parts the right way (Is shiity atm, due is only made for simulation)
+
 class App extends Component {
 
     //================================
@@ -44,7 +52,7 @@ class App extends Component {
     //================================
 
     componentDidMount() {
-        this.pixiTableDesign     = new PIXI.Application(900, 315);
+        this.pixiTableDesign     = new PIXI.Application(900, 350);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         const TableContainer = document.querySelector('#App')
@@ -365,10 +373,11 @@ class App extends Component {
         this.currentX += actualWidth;
 
         if (tableData['MaxPerRow'] == this.currentIndex) {
-            this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
-            this.pixiTableDesign.view.setAttribute('height', (this.currentY + (borderSize * tableData['MaxPerRow'])) + "px");
-            this.currentRow += 1;
             this.currentY += actualHeight;
+
+            this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
+            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * tableData['MaxPerRow'])) + "px");
+            this.currentRow += 1;
             this.currentX     = 0;
             this.currentIndex = 0;
         }
