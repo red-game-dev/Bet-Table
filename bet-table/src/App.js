@@ -266,6 +266,12 @@ class App extends Component {
         const hoverBackColor   = args.HoverBackColor || tableData.defaultHoverBackColor;
         const hoverBorderColor = args.HoverBorderColor || tableData.defaultHoverBorderColor;
         const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
+        // CALL BACKS
+        // * Can use default callbacks or your own!
+        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeClick;
+        const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.onShapeHoverIN;
+        const hoverOUTCallBack  = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeHoverOUT;
+
 
         const shapeStr   = args.Text || "";
         const textHoriz  = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
@@ -305,21 +311,22 @@ class App extends Component {
         Shape.interactive     = true;
         Shape.buttonMode      = true;
 
+
         // Event Handlers
         Shape
-            .on('pointerover', this.onShapeHoverIN.bind(this));
+            .on('pointerover', hoverInCallBack.bind(this));
         shapeText
-            .on('pointerover', this.onShapeHoverIN.bind(this));
+            .on('pointerover', hoverInCallBack.bind(this));
 
         Shape
-            .on('pointerout', this.onShapeHoverOUT.bind(this));
+            .on('pointerout', hoverOUTCallBack.bind(this));
         shapeText
-            .on('pointerout', this.onShapeHoverOUT.bind(this));
+            .on('pointerout', hoverOUTCallBack.bind(this));
 
         Shape
-            .on('pointertap', this.onShapeClick.bind(this))
+            .on('pointertap', clickCallBack.bind(this))
         shapeText
-            .on('pointertap', this.onShapeClick.bind(this))
+            .on('pointertap', clickCallBack.bind(this))
 
         this.pixiTableDesign.stage.addChild(Shape, shapeText);
 

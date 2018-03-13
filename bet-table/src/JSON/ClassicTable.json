@@ -16,6 +16,9 @@
         "BackColor": "#F22E1A",
         "TextColor": "white",
         "Border": "#f9fbf5",
+        "Events": {
+          "Click": "onShapeClick"
+        },
         "Size": {
           "Y": 60,
           "X": 60

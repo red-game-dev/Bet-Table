@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="393" column="25" lean-forward="false" selection-start-line="393" selection-start-column="25" selection-end-line="393" selection-end-column="25" />
+            <state relative-caret-position="116">
+              <caret line="270" column="116" lean-forward="false" selection-start-line="270" selection-start-column="104" selection-end-line="270" selection-end-column="116" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="n#!!block;n#constructor#0;n#App#0" expanded="false" />
@@ -35,7 +35,6 @@
                 <element signature="n#!!block;n#clearBets#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#onShapeHoverIN#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#onShapeHoverOUT#0;n#App#0" expanded="false" />
-                <element signature="n#!!block;n#makeTableItem#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#makeCanvas#0;n#App#0" expanded="false" />
               </folding>
             </state>
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassicTable.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClassicTable.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/JSON/ClassicTable.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="37" />
+            <state relative-caret-position="256">
+              <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -71,28 +70,29 @@
       <find>setChipMap</find>
       <find>defaultFontSize</find>
       <find>this.pixiTableDesign.stage</find>
-      <find>defaultFont</find>
-      <find>'</find>
       <find>shapesMap</find>
       <find>this.Shape</find>
       <find>this.set</find>
       <find>lastBet.MapKey</find>
+      <find>'</find>
+      <find>makeTableDesignRow</find>
+      <find>defaultFont</find>
     </findStrings>
     <replaceStrings>
       <replace>tableData</replace>
       <replace>setCipAmountMap</replace>
-      <replace>default</replace>
-      <replace>&quot;</replace>
       <replace>universalKey</replace>
+      <replace>&quot;</replace>
       <replace>makeTableItem</replace>
+      <replace>default</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/JSON/ClassicTable.json" />
         <option value="$PROJECT_DIR$/src/JSON/Chips.json" />
         <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/JSON/ClassicTable.json" />
       </list>
     </option>
   </component>
@@ -194,12 +194,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520967577807</updated>
-      <workItem from="1520967579463" duration="11216000" />
+      <workItem from="1520967579463" duration="12990000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11216000" />
+    <option name="totallyTimeSpent" value="12990000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -236,7 +236,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/App.js</url>
-          <line>410</line>
+          <line>417</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -246,26 +246,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/JSON/Chips.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JSON/ClassicTable.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="393" column="25" lean-forward="false" selection-start-line="393" selection-start-column="25" selection-end-line="393" selection-end-column="25" />
+        <state relative-caret-position="116">
+          <caret line="270" column="116" lean-forward="false" selection-start-line="270" selection-start-column="104" selection-end-line="270" selection-end-column="116" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="n#!!block;n#constructor#0;n#App#0" expanded="false" />
@@ -282,9 +266,24 @@
             <element signature="n#!!block;n#clearBets#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#onShapeHoverIN#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#onShapeHoverOUT#0;n#App#0" expanded="false" />
-            <element signature="n#!!block;n#makeTableItem#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#makeCanvas#0;n#App#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JSON/Chips.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JSON/ClassicTable.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
