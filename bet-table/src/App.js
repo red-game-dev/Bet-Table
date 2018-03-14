@@ -27,7 +27,6 @@ import './App.css';
 // .on('touchendoutside', onButtonUp)
 
 // WHAT IS LEFT
-// 1. Highlight specific shape and highlight other shapes
 // 2. Place Bets on more parts on each slot
 // 3. Make the table look the same as origianl (Introducing Also Assets on Background, only if it has)
 // 4. Use real chips for test
@@ -159,8 +158,8 @@ class App extends Component {
     //================================
 
     onShapeBetHoverIN(event) {
-        const shapeMap = event.currentTarget.shapeMap;
-        const Shape    = shapeMap.Shape.Graphic;
+        const shapeMap      = event.currentTarget.shapeMap;
+        const Shape         = shapeMap.Shape.Graphic;
 
         Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
         Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
@@ -192,7 +191,7 @@ class App extends Component {
         const fontStroke    = chipData.ChipTextConfig.defaultStroke;
         const fontThickness = chipData.ChipTextConfig.defaultThickness;
 
-        const universalKey = String(shapeMap.Text.String);
+        const universalKey = String(shapeMap.Id);
         const chipMapped   = this.getChipAmountMap(universalKey);
 
         const chipAmount    = this.getChipValue();
@@ -256,12 +255,60 @@ class App extends Component {
         })
     }
 
+    multiBetHoverInShapes(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape    = shapeMap.Shape.Graphic;
+        const highlightList = shapeMap.HighlightShapes;
+
+        Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
+        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+
+        Object.keys(highlightList).forEach((row, index) => {
+            highlightList[row].map(shapeId => {
+                const getShapeMapped = this.getShapesMap(shapeId);
+                const shapeGraphic = getShapeMapped.Shape.Graphic;
+
+                shapeGraphic.beginFill(getShapeMapped.Shape.HoverBackColor, getShapeMapped.Shape.HoverBackColorAlpha);
+                shapeGraphic.lineStyle(getShapeMapped.Shape.HoverBorderSize, getShapeMapped.Shape.HoverBorderColor);
+                shapeGraphic.drawRect(getShapeMapped.Shape.X, getShapeMapped.Shape.Y, getShapeMapped.Shape.Width, getShapeMapped.Shape.Height);
+                shapeGraphic.endFill();
+            })
+        })
+    }
+
+    multiBetHoverOutShapes(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape    = shapeMap.Shape.Graphic;
+        const highlightList = shapeMap.HighlightShapes;
+
+        Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
+        Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+
+        Object.keys(highlightList).forEach((row, index) => {
+            highlightList[row].map(shapeId => {
+                const getShapeMapped = this.getShapesMap(shapeId);
+                const shapeGraphic = getShapeMapped.Shape.Graphic;
+
+                shapeGraphic.beginFill(getShapeMapped.Shape.NormalBackColor, getShapeMapped.Shape.NornalBackColorAlpha);
+                shapeGraphic.lineStyle(getShapeMapped.Shape.NormalBorderSize, getShapeMapped.Shape.NormalBorderColor);
+                shapeGraphic.drawRect(getShapeMapped.Shape.X, getShapeMapped.Shape.Y, getShapeMapped.Shape.Width, getShapeMapped.Shape.Height);
+                shapeGraphic.endFill();
+            })
+        })
+    }
+
     //======================================
     // CANVAS ITEM - CREATE SHAPE WITH TEXT
     //======================================
 
     makeTableItem(args) {
         this.currentIndex += 1;
+
+        const mainShapeId      = args.id;
         const actualWidth      = args.Size.X - tableData.defaultBorderSize;
         const actualHeight     = args.Size.Y - tableData.defaultBorderSize;
         const fontSize         = args.FontSize || tableData.defaultFontSize;
@@ -273,6 +320,7 @@ class App extends Component {
         const hoverBackColor   = args.HoverBackColor || tableData.defaultHoverBackColor;
         const hoverBorderColor = args.HoverBorderColor || tableData.defaultHoverBorderColor;
         const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
+        const highlightList    = args.Highlight ? args.Highlight : {};
         // CALL BACKS
         // * Can use default callbacks or your own!
         const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeBetClick;
@@ -293,7 +341,7 @@ class App extends Component {
         }
 
         // SET Chip Map
-        this.setCipAmountMap(shapeStr, {
+        this.setCipAmountMap(mainShapeId, {
             Amount: 0
         });
 
@@ -320,24 +368,24 @@ class App extends Component {
         // Event Handlers
         Shape
             .on('pointerover', hoverInCallBack.bind(this));
-        shapeText
-            .on('pointerover', hoverInCallBack.bind(this));
+        //shapeText
+        //    .on('pointerover', hoverInCallBack.bind(this));
 
         Shape
             .on('pointerout', hoverOUTCallBack.bind(this));
-        shapeText
-            .on('pointerout', hoverOUTCallBack.bind(this));
+        //shapeText
+        //    .on('pointerout', hoverOUTCallBack.bind(this));
 
         Shape
             .on('pointertap', clickCallBack.bind(this))
-        shapeText
-            .on('pointertap', clickCallBack.bind(this))
+        //shapeText
+        //    .on('pointertap', clickCallBack.bind(this))
 
         this.pixiTableDesign.stage.addChild(Shape, shapeText);
 
         // This is required to map all shapes
-        this.setShapeMap(args.Text, {
-            Shape: {
+        this.setShapeMap(mainShapeId, {
+            Shape:           {
                 Width:                actualWidth,
                 Height:               actualHeight,
                 X:                    this.currentX,
@@ -352,26 +400,26 @@ class App extends Component {
                 HoverBorderColor:     '0x' + hoverBorderColor.replace('#', ''),
                 Graphic:              Shape
             },
-            Text:  {
+            Text:            {
                 String:  shapeStr,
                 X:       textHoriz,
                 Y:       textVerti,
                 TextObj: shapeText,
             },
-            Row:   this.currentRow,
-            Index: this.currentIndex
+            HighlightShapes: highlightList,
+            Id:              mainShapeId,
+            Row:             this.currentRow,
+            Index:           this.currentIndex
         })
 
         // This is required to access it on event handler
-        Shape.shapeMap     = this.getShapesMap(args.Text);
-        shapeText.shapeMap = this.getShapesMap(args.Text);
+        Shape.shapeMap     = this.getShapesMap(mainShapeId);
+        shapeText.shapeMap = this.getShapesMap(mainShapeId);
 
         // Next X cord ->
         this.currentX += actualWidth;
         if (tableData['MaxPerRow'][String(this.currentRow)] == this.currentIndex) {
             this.currentY += actualHeight;
-            console.log(tableData['MaxPerRow'][String(this.currentRow)])
-
             this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
             this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * tableData['MaxPerRow'][String(this.currentRow)])) + "px");
             this.currentRow += 1;
