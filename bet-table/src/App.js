@@ -339,6 +339,8 @@ class App extends Component {
         const mainShapeId = args.id;
         const actualWidth = args.Size.Width - tableData.defaultBorderSize;
         const actualHeight = args.Size.Height - tableData.defaultBorderSize;
+        const borderSize = args.BorderSize || tableData.defaultBorderSize;
+        const normalAlpha = args.BackColorAlpha || tableData.defaultBackColorAlpha;
         const highlightList = args.Highlight ? args.Highlight : {};
         const betAreasRowsCells = betTable.BetAreasConfig && betTable.BetAreasConfig.BetAreasRowsCells ? betTable.BetAreasConfig.BetAreasRowsCells : [];
 
