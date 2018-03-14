@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/bet-table">
       <excludeFolder url="file://$MODULE_DIR$/bet-table/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/bet-table/public" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
