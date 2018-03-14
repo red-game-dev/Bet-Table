@@ -6,7 +6,7 @@
  "BetAreasRows": {
      "1": [
        {
-         "id": 1,
+         "id": "betArea_1",
          "Bet": "n1",
          "Size": {
            "Height": 6.66,
@@ -26,7 +26,7 @@
          }
        },
        {
-         "id": 2,
+         "id": "betArea_2",
          "Bet": "n2",
          "Size": {
            "Height": 6.66,
@@ -46,7 +46,7 @@
          }
        },
        {
-         "id": 3,
+         "id": "betArea_3",
          "Bet": "n3",
          "Size": {
            "Height": 6.66,
@@ -66,7 +66,7 @@
          }
        },
        {
-         "id": 4,
+         "id": "betArea_4",
          "Bet": "n4",
          "Size": {
            "Height": 6.66,
@@ -86,7 +86,7 @@
          }
        },
        {
-         "id": 5,
+         "id": "betArea_5",
          "Bet": "n5",
          "Size": {
            "Height": 6.66,
