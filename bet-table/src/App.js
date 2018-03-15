@@ -199,7 +199,6 @@ class App extends Component {
         if (!this.getChipValue()) {
             return;
         }
-        console.log(event.currentTarget)
 
         const shapeMap = event.currentTarget.shapeMap;
         const Shape    = shapeMap.Shape.Graphic;
@@ -241,7 +240,7 @@ class App extends Component {
         const chipY = shapeMap.Shape.Y + (shapeMap.Shape.Height / 2);
 
         if (chipModel && chipMapped.Amount > 0) {
-            chipModel.image = PIXI.Sprite.fromImage(chipPath)
+            chipModel.image = chipPath
             chipText.text   = chipNewAmount;
         } else {
 
@@ -260,6 +259,7 @@ class App extends Component {
             this.pixiTableDesign.stage.addChild(chipModel, chipText);
         }
 
+
         const newShapeMapped = Object.assign(this.getShapesMap(universalKey), {
             Chip: {
                 ChipModel: chipModel,
@@ -274,7 +274,7 @@ class App extends Component {
             Amount: chipAmount
         })
 
-        this.setCipAmountMap(String(universalKey), {
+        this.setCipAmountMap(universalKey, {
             Amount: chipNewAmount
         })
     }
