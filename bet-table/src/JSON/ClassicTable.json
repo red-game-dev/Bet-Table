@@ -1,4 +1,7 @@
 {
+  "Development": {
+    "IS_DEBUG_MODE": true
+  },
   "defaultBorderSize": 1,
   "defaultFontSize": 12,
   "defaultFontFamily": "Arial, Helvetica, sans-serif",
@@ -424,7 +427,7 @@
     "4": [
       {
         "id": 37,
-        "Text": "37",
+        "Text": "1st12",
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -446,7 +449,7 @@
       },
       {
         "id": 38,
-        "Text": "38",
+        "Text": "2nd12",
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -457,7 +460,7 @@
       },
       {
         "id": 39,
-        "Text": "39",
+        "Text": "3rd12",
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -470,7 +473,7 @@
     "5": [
       {
         "id": 40,
-        "Text": "49",
+        "Text": "1-18",
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -481,7 +484,7 @@
       },
       {
         "id": 41,
-        "Text": "2",
+        "Text": "EVEN",
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -514,7 +517,7 @@
       },
       {
         "id": 44,
-        "Text": "52",
+        "Text": "ODD",
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#F9FBF5",
@@ -525,7 +528,7 @@
       },
       {
         "id": 45,
-        "Text": "53",
+        "Text": "19-36",
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",

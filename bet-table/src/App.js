@@ -358,9 +358,9 @@ class App extends Component {
 
         const Cell = new PIXI.Graphics();
 
-        // Make Shape
-        Cell.beginFill('0x' + "#66ccff".replace('#', ''), normalAlpha);
-        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''));
+        // `tableData.Development.IS_DEBUG_MODE` debugging mode for grid
+        Cell.beginFill('0x' + "#66ccff".replace('#', ''), tableData.Development.IS_DEBUG_MODE ? normalAlpha : 0);
+        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''), tableData.Development.IS_DEBUG_MODE ? normalAlpha : 0);
         Cell.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
         Cell.endFill();
 
@@ -477,6 +477,9 @@ class App extends Component {
 
         Shape
             .on('pointerout', hoverOUTCallBack.bind(this));
+        //
+        // Shape
+        //     .on('pointertap', clickCallBack.bind(this));
 
         this.pixiTableDesign.stage.addChild(Shape, shapeText);
 
