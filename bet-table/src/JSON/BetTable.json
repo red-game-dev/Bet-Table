@@ -1,110 +1,3043 @@
 {
- "BetAreasConfig": {
-   "BetAreasRows": 3,
-   "BetAreasRowsCells": 3
- },
- "BetAreasRows": {
-     "1": [
-       {
-         "id": "betArea_1",
-         "Bet": "n1",
-         "Size": {
-           "Height": 6.66,
-           "Width": 6.66
-         },
-         "Events": {
-           "Click": "onShapeBetClick",
-           "HoverIN": "multiBetHoverInShapes",
-           "HoverOUT": "multiBetHoverOutShapes"
-         },
-         "Highlight": {
-           "1": [1],
-           "2": [],
-           "3": [],
-           "4": [],
-           "5": []
-         }
-       },
-       {
-         "id": "betArea_2",
-         "Bet": "n2",
-         "Size": {
-           "Height": 6.66,
-           "Width": 6.66
-         },
-         "Events": {
-           "Click": "onShapeBetClick",
-           "HoverIN": "multiBetHoverInShapes",
-           "HoverOUT": "multiBetHoverOutShapes"
-         },
-         "Highlight": {
-           "1": [2],
-           "2": [],
-           "3": [],
-           "4": [],
-           "5": []
-         }
-       },
-       {
-         "id": "betArea_3",
-         "Bet": "n3",
-         "Size": {
-           "Height": 6.66,
-           "Width": 6.66
-         },
-         "Events": {
-           "Click": "onShapeBetClick",
-           "HoverIN": "multiBetHoverInShapes",
-           "HoverOUT": "multiBetHoverOutShapes"
-         },
-         "Highlight": {
-           "1": [3],
-           "2": [],
-           "3": [],
-           "4": [],
-           "5": []
-         }
-       },
-       {
-         "id": "betArea_4",
-         "Bet": "n4",
-         "Size": {
-           "Height": 6.66,
-           "Width": 6.66
-         },
-         "Events": {
-           "Click": "onShapeBetClick",
-           "HoverIN": "multiBetHoverInShapes",
-           "HoverOUT": "multiBetHoverOutShapes"
-         },
-         "Highlight": {
-           "1": [4],
-           "2": [],
-           "3": [],
-           "4": [],
-           "5": []
-         }
-       },
-       {
-         "id": "betArea_5",
-         "Bet": "n5",
-         "Size": {
-           "Height": 6.66,
-           "Width": 6.66
-         },
-         "Events": {
-           "Click": "onShapeBetClick",
-           "HoverIN": "multiBetHoverInShapes",
-           "HoverOUT": "multiBetHoverOutShapes"
-         },
-         "Highlight": {
-           "1": [5],
-           "2": [],
-           "3": [],
-           "4": [],
-           "5": []
-         }
-       }
-     ]
- }
+  "BetAreasConfig": {
+    "BetAreasRows": 21,
+    "BetAreasRowsCells": 21
+  },
+  "BetAreasRows": {
+    "1": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "2": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "3": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "4": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 40,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "5": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 25,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "6": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            14
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_15",
+        "Bet": "n15",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            15
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_16",
+        "Bet": "n16",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            16
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_17",
+        "Bet": "n17",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            17
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_18",
+        "Bet": "n18",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            18
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_19",
+        "Bet": "n19",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            19
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_20",
+        "Bet": "n20",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            20
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_21",
+        "Bet": "n21",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            21
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_22",
+        "Bet": "n22",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            22
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_23",
+        "Bet": "n23",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            23
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_24",
+        "Bet": "n24",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            24
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_25",
+        "Bet": "n25",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [
+            25
+          ],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },{
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 30
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 32
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      },
+      {
+        "id": "betArea_26",
+        "Bet": "n26",
+        "Size": {
+          "Height": 14,
+          "Width": 31
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+        }
+      }
+    ],
+    "7": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 227
+        },
+        "Events": {
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        },
+        "Highlight": {
+          "1": [1, 2, 3],
+          "2": [24,23],
+          "3": [31,32],
+          "4": [],
+          "5": [40]
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 237
+        },
+        "Events": {
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 226
+        },
+        "Events": {
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      }
+    ],
+    "8": [
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 109
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 119
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 119
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 119
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 119
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      },
+      {
+        "id": "betArea_14",
+        "Bet": "n14",
+        "Size": {
+          "Height": 60,
+          "Width": 108
+        },
+        "Events": {
+          "Click": "onShapeBetClick",
+          "HoverIN": "multiBetHoverInShapes",
+          "HoverOUT": "multiBetHoverOutShapes"
+        }
+      }
+    ]
+  }
 }

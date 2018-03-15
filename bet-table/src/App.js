@@ -342,7 +342,7 @@ class App extends Component {
         const borderSize = args.BorderSize || tableData.defaultBorderSize;
         const normalAlpha = args.BackColorAlpha || tableData.defaultBackColorAlpha;
         const highlightList = args.Highlight ? args.Highlight : {};
-        const betAreasRowsCells = betTable.BetAreasConfig && betTable.BetAreasConfig.BetAreasRowsCells ? betTable.BetAreasConfig.BetAreasRowsCells : [];
+        const betAreasRowsCells = betTable['BetAreasRows'][String(this.currentRow)].length || 0;
 
         // CALL BACKS
         // * Can use default callbacks or your own!
@@ -355,34 +355,51 @@ class App extends Component {
             Amount: 0
         });
 
-        const Shape = new PIXI.Graphics();
+        const Cell = new PIXI.Graphics();
 
         // Make Shape
-        Shape.beginFill('0x' + args.BackColor.replace('#', ''), normalAlpha);
-        Shape.lineStyle(borderSize, '0x' + args.Border.replace('#', ''));
-        Shape.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
-        Shape.endFill();
+        Cell.beginFill('0x' + "#66ccff".replace('#', ''), normalAlpha);
+        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''));
+        Cell.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
+        Cell.endFill();
 
-        Shape.interactive = true;
-        Shape.buttonMode = true;
+        Cell.interactive = true;
+        Cell.buttonMode = true;
 
-        // Event Handlers
-        Shape
-            .on('pointerover', hoverInCallBack.bind(this));
-        //shapeText
-        //    .on('pointerover', hoverInCallBack.bind(this));
-
-        Shape
-            .on('pointerout', hoverOUTCallBack.bind(this));
-        //shapeText
-        //    .on('pointerout', hoverOUTCallBack.bind(this));
-
-        Shape
+        Cell
             .on('pointertap', clickCallBack.bind(this))
-        //shapeText
-        //    .on('pointertap', clickCallBack.bind(this))
 
-        this.pixiTableDesign.stage.addChild(Shape);
+        this.pixiTableDesign.stage.addChild(Cell);
+
+
+
+        // This is required to map all shapes
+        this.setShapeMap(mainShapeId, {
+            Shape: {
+                Width: actualWidth,
+                Height: actualHeight,
+                X: this.currentX,
+                Y: this.currentY,
+                NormalBorderSize: borderSize,
+                NornalBackColorAlpha: normalAlpha,
+                Graphic: Cell
+            },
+            HighlightShapes: highlightList,
+            Id: mainShapeId,
+            Row: this.currentRow,
+            Index: this.currentIndex
+        })
+
+        // This is required to access it on event handler
+        Cell.shapeMap = this.getShapesMap(mainShapeId);
+
+        this.currentX += actualWidth;
+        if(betAreasRowsCells == this.currentIndex) {
+            this.currentRow += 1;
+            this.currentY += actualHeight;
+            this.currentX = 10;
+            this.currentIndex = 0;
+        }
     }
 
 
@@ -402,8 +419,6 @@ class App extends Component {
         const hoverBorderColor = args.HoverBorderColor || tableData.defaultHoverBorderColor;
         const hoverAlpha = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
         const highlightList = args.Highlight ? args.Highlight : {};
-        const betAreas = args.BetAreas ? args.BetAreas : [];
-        const betAreasRowsCells = args.BetAreasRowsCells ? args.BetAreasRowsCells : 0;
 
         // CALL BACKS
         // * Can use default callbacks or your own!
@@ -452,18 +467,10 @@ class App extends Component {
         // Event Handlers
         Shape
             .on('pointerover', hoverInCallBack.bind(this));
-        //shapeText
-        //    .on('pointerover', hoverInCallBack.bind(this));
 
         Shape
             .on('pointerout', hoverOUTCallBack.bind(this));
-        //shapeText
-        //    .on('pointerout', hoverOUTCallBack.bind(this));
 
-        Shape
-            .on('pointertap', clickCallBack.bind(this))
-        //shapeText
-        //    .on('pointertap', clickCallBack.bind(this))
 
         this.pixiTableDesign.stage.addChild(Shape, shapeText);
 
@@ -518,7 +525,6 @@ class App extends Component {
                 TextObj: shapeText,
             },
             HighlightShapes: highlightList,
-            BetAreas: betAreas,
             Id: mainShapeId,
             Row: this.currentRow,
             Index: this.currentIndex
@@ -545,10 +551,6 @@ class App extends Component {
     //======================================
 
     buildTable() {
-        this.currentY = 0;
-        this.currentX = 0;
-        this.currentRow = 1;
-        this.currentIndex = 0;
         this.shapesMap = {};
         this.betHistory = [];
         this.chipAmountMap = {};
@@ -560,12 +562,22 @@ class App extends Component {
     }
 
     buildTableBackground(){
+        this.currentY = 0;
+        this.currentX = 0;
+        this.currentRow = 1;
+        this.currentIndex = 0;
+
         Object.keys(tableData['Rows']).forEach((curRow, index) => {
             tableData['Rows'][curRow].map(this.makeTableItem.bind(this))
         })
     }
 
     buildTableBetGrid(){
+        this.currentY = 15;
+        this.currentX = 10;
+        this.currentRow = 1;
+        this.currentIndex = 0;
+
         Object.keys(betTable['BetAreasRows']).forEach((curRow, index) => {
             betTable['BetAreasRows'][curRow].map(this.makeTableBetCell.bind(this))
         })
