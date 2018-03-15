@@ -1,6 +1,6 @@
 {
   "Development": {
-    "IS_DEBUG_MODE": true
+    "IS_DEBUG_MODE": false
   },
   "defaultBorderSize": 1,
   "defaultFontSize": 12,

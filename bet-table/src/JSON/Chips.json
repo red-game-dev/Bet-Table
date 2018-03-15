@@ -1,16 +1,16 @@
 {
   "ChipPaths": {
-    "100": "./goz.png",
-    "200": "./goz.png",
-    "300": "./goz.png",
-    "400": "./goz.png",
-    "500": "./goz.png",
-    "600": "./goz.png",
-    "700": "./goz.png",
-    "800": "./goz.png",
-    "900": "./goz.png",
-    "1000": "./goz.png",
-    "defaultChip": "./goz.png"
+    "100": "./Images/Chips/chip1.svg",
+    "200": "./Images/Chips/chip2.svg",
+    "300": "./Images/Chips/chip3.svg",
+    "400": "./Images/Chips/chip4.svg",
+    "500": "./Images/Chips/chip5.svg",
+    "600": "./Images/Chips/chip6.svg",
+    "700": "./Images/Chips/chip7.svg",
+    "800": "./Images/Chips/chip8.svg",
+    "900": "./Images/Chips/chip9.svg",
+    "1000": "./Images/Chips/chip9.svg",
+    "defaultChip": "./Images/Chips/chip9.svg"
   },
   "ChipConfig":{
     "Width": 29.5,
