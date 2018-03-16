@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import tableData from './JSON/ClassicTable';
+import classicTable from './JSON/ClassicTable';
+import transparentTable from './JSON/TransparentTable';
 import chipData from './JSON/Chips'
 import betTable from './JSON/BetTable';
 import * as PIXI from 'pixi.js';
@@ -43,7 +44,9 @@ class App extends Component {
         super(props)
 
         this.chipAmountMap = {}
-        this.betHistory    = [];
+        this.betHistory = [];
+        this.beforeRefreshHistory = [];
+        this.currentTable = null;
     }
 
     //================================
@@ -101,21 +104,21 @@ class App extends Component {
         const lastBet = this.getBetHistory(this.betHistory.length - 1)
 
         if (lastBet) {
-            const universalKey      = lastBet.MapKey;
-            const shapeMapped       = this.getShapesMap(universalKey)
-            const chipText          = shapeMapped.Chip.ChipText;
-            const chipModel         = shapeMapped.Chip.ChipModel;
-            const currentBetAmount  = Number(chipText.text);
+            const universalKey = lastBet.MapKey;
+            const shapeMapped = this.getShapesMap(universalKey)
+            const chipText = shapeMapped.Chip.ChipText;
+            const chipModel = shapeMapped.Chip.ChipModel;
+            const currentBetAmount = Number(chipText.text);
             const previousBetAmount = currentBetAmount - lastBet.Amount;
 
             if (chipText && chipModel) {
 
                 if (previousBetAmount > 0) {
-                    const path     = chipData.ChipPaths[String(previousBetAmount)];
+                    const path = chipData.ChipPaths[String(previousBetAmount)];
                     const chipPath = path ? path : chipData.ChipPaths.defaultChip;
 
                     chipModel.image = PIXI.Sprite.fromImage(chipPath);
-                    chipText.text   = previousBetAmount;
+                    chipText.text = previousBetAmount;
 
                     this.setCipAmountMap(universalKey, {
                         Amount: previousBetAmount
@@ -145,13 +148,13 @@ class App extends Component {
 
     clearBets() {
         const betHistory = this.betHistory;
-        this.betHistory  = [];
+        this.betHistory = [];
 
         betHistory.map(currentBet => {
             console.log(currentBet)
             if (currentBet.MapKey) {
                 const universalKey = currentBet.MapKey;
-                const shapeMapped  = this.getShapesMap(universalKey)
+                const shapeMapped = this.getShapesMap(universalKey)
 
                 if (shapeMapped.Chip) {
                     if (shapeMapped.Chip.ChipText) {
@@ -171,68 +174,89 @@ class App extends Component {
         })
     }
 
-    //================================
-    // CANVAS HANDLERS
-    //================================
+    repeatBets(){
+        if(this.beforeRefreshHistory.length){
 
-    onShapeBetHoverIN(event) {
-        const shapeMap = event.currentTarget.shapeMap;
-        const Shape    = shapeMap.Shape.Graphic;
+            this.beforeRefreshHistory.map(bet => {
+                const universalKey = bet.MapKey;
 
-        Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
-        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
-        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-        Shape.endFill();
-    }
+                if(universalKey){
+                    this.makeBet(this.getShapesMap(universalKey));
+                }
+            })
+        }else if(this.betHistory.length){
 
-    onShapeBetHoverOUT(event) {
-        const shapeMap = event.currentTarget.shapeMap;
-        const Shape    = shapeMap.Shape.Graphic;
+            this.betHistory.map(bet => {
+                const universalKey = bet.MapKey;
 
-        Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
-        Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
-        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-        Shape.endFill();
-    }
-
-    onShapeBetClick(event) {
-        if (!this.getChipValue()) {
-            return;
+                if(universalKey){
+                    this.makeBet(this.getShapesMap(universalKey));
+                }
+            })
         }
+    }
 
-        const shapeMap = event.currentTarget.shapeMap;
-        const Shape    = shapeMap.Shape.Graphic;
+    doubleBets(){
+        if(this.beforeRefreshHistory.length){
+
+            this.beforeRefreshHistory.map(bet => {
+                const universalKey = bet.MapKey;
+
+                const chipMapped = this.getChipAmountMap(universalKey);
+                const chipNewAmount = chipMapped.Amount * 2;
+
+                if(universalKey){
+                    this.makeBet(this.getShapesMap(universalKey));
+                }
+            })
+        }else if(this.betHistory.length){
+
+            this.betHistory.map(bet => {
+                const universalKey = bet.MapKey;
+
+                const chipMapped = this.getChipAmountMap(universalKey);
+                const chipNewAmount = chipMapped.Amount * 2;
+
+                if(universalKey){
+                    this.makeBet(this.getShapesMap(universalKey));
+                }
+            })
+        }
+    }
+
+    makeBet(shapeMap){
+        const Shape = shapeMap.Shape.Graphic;
         const BetAreas = shapeMap.BetAreas;
 
-        const fontWeight    = chipData.ChipTextConfig.defaultWeight;
-        const fontSize      = chipData.ChipTextConfig.defaultSize;
-        const fontFamily    = chipData.ChipTextConfig.defaultFamily;
-        const fontColor     = chipData.ChipTextConfig.defaultColor;
-        const fontStroke    = chipData.ChipTextConfig.defaultStroke;
+        const fontWeight = chipData.ChipTextConfig.defaultWeight;
+        const fontSize = chipData.ChipTextConfig.defaultSize;
+        const fontFamily = chipData.ChipTextConfig.defaultFamily;
+        const fontColor = chipData.ChipTextConfig.defaultColor;
+        const fontStroke = chipData.ChipTextConfig.defaultStroke;
         const fontThickness = chipData.ChipTextConfig.defaultThickness;
 
         const universalKey = String(shapeMap.Id);
-        const chipMapped   = this.getChipAmountMap(universalKey);
+        const chipMapped = this.getChipAmountMap(universalKey);
 
-        const chipAmount    = this.getChipValue();
+        const chipAmount = this.getChipValue();
         // increase chip amount
         const chipNewAmount = chipMapped.Amount + chipAmount;
 
-        const path     = chipData.ChipPaths[String(chipNewAmount)];
+        const path = chipData.ChipPaths[String(chipNewAmount)];
         const chipPath = path ? path : chipData.ChipPaths.defaultChip;
 
         const chipModel = shapeMap.Chip ? shapeMap.Chip.ChipModel : PIXI.Sprite.fromImage(chipPath);
-        const chipText  = shapeMap.Chip ? shapeMap.Chip.ChipText : new PIXI.Text(String(chipAmount), {
-            fontWeight:      fontWeight,
-            fontSize:        fontSize,
-            fontFamily:      fontFamily,
-            fill:            fontColor,
-            align:           'center',
-            stroke:          fontStroke,
+        const chipText = shapeMap.Chip ? shapeMap.Chip.ChipText : new PIXI.Text(String(chipAmount), {
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            fontFamily: fontFamily,
+            fill: fontColor,
+            align: 'center',
+            stroke: fontStroke,
             strokeThickness: fontThickness
         })
 
-        const chipWidth  = chipData.ChipConfig && chipData.ChipConfig.Width ? chipData.ChipConfig.Width : shapeMap.Shape.Width / 2;
+        const chipWidth = chipData.ChipConfig && chipData.ChipConfig.Width ? chipData.ChipConfig.Width : shapeMap.Shape.Width / 2;
         const chipHeight = chipData.ChipConfig && chipData.ChipConfig.Height ? chipData.ChipConfig.Height : shapeMap.Shape.Height / 2
 
         // we just need to change the cords of these biitchs, biitch x and biitch y
@@ -241,14 +265,14 @@ class App extends Component {
 
         if (chipModel && chipMapped.Amount > 0) {
             chipModel.image = chipPath
-            chipText.text   = chipNewAmount;
+            chipText.text = chipNewAmount;
         } else {
 
             // ADD CHIP
-            chipModel.width  = chipWidth
+            chipModel.width = chipWidth
             chipModel.height = chipHeight
-            chipModel.x      = chipX;
-            chipModel.y      = chipY;
+            chipModel.x = chipX;
+            chipModel.y = chipY;
 
             chipText.x = chipX
             chipText.y = chipY
@@ -263,7 +287,7 @@ class App extends Component {
         const newShapeMapped = Object.assign(this.getShapesMap(universalKey), {
             Chip: {
                 ChipModel: chipModel,
-                ChipText:  chipText
+                ChipText: chipText
             }
         });
 
@@ -279,9 +303,52 @@ class App extends Component {
         })
     }
 
+    switchTable(tableData, allowRefresh) {
+        this.currentTable = tableData;
+        this.beforeRefreshHistory = this.betHistory;
+
+        if(allowRefresh) {
+            this.clearBets();
+            this.switchBuiltTable()
+            this.repeatBets()
+        }
+    }
+
+    //================================
+    // CANVAS HANDLERS
+    //================================
+
+    onShapeBetHoverIN(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
+
+        Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
+        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+    }
+
+    onShapeBetHoverOUT(event) {
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
+
+        Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
+        Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
+        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
+        Shape.endFill();
+    }
+
+    onShapeBetClick(event) {
+        if (!this.getChipValue()) {
+            return;
+        }
+
+        this.makeBet(event.currentTarget.shapeMap)
+    }
+
     multiBetHoverInShapes(event) {
-        const shapeMap      = event.currentTarget.shapeMap;
-        const Shape         = shapeMap.Shape.Graphic;
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
         const highlightList = shapeMap.HighlightShapes;
 
 
@@ -295,7 +362,7 @@ class App extends Component {
         Object.keys(highlightList).forEach((row, index) => {
             highlightList[row].map(shapeId => {
                 const getShapeMapped = this.getShapesMap(shapeId);
-                const shapeGraphic   = getShapeMapped.Shape.Graphic;
+                const shapeGraphic = getShapeMapped.Shape.Graphic;
 
                 shapeGraphic.beginFill(getShapeMapped.Shape.HoverBackColor, getShapeMapped.Shape.HoverBackColorAlpha);
                 shapeGraphic.lineStyle(getShapeMapped.Shape.HoverBorderSize, getShapeMapped.Shape.HoverBorderColor);
@@ -306,8 +373,8 @@ class App extends Component {
     }
 
     multiBetHoverOutShapes(event) {
-        const shapeMap      = event.currentTarget.shapeMap;
-        const Shape         = shapeMap.Shape.Graphic;
+        const shapeMap = event.currentTarget.shapeMap;
+        const Shape = shapeMap.Shape.Graphic;
         const highlightList = shapeMap.HighlightShapes;
 
         if (shapeMap.Config.HighlightShape) {
@@ -320,7 +387,7 @@ class App extends Component {
         Object.keys(highlightList).forEach((row, index) => {
             highlightList[row].map(shapeId => {
                 const getShapeMapped = this.getShapesMap(shapeId);
-                const shapeGraphic   = getShapeMapped.Shape.Graphic;
+                const shapeGraphic = getShapeMapped.Shape.Graphic;
 
                 shapeGraphic.beginFill(getShapeMapped.Shape.NormalBackColor, getShapeMapped.Shape.NornalBackColorAlpha);
                 shapeGraphic.lineStyle(getShapeMapped.Shape.NormalBorderSize, getShapeMapped.Shape.NormalBorderColor);
@@ -337,18 +404,18 @@ class App extends Component {
     makeTableBetCell(args) {
         this.currentIndex += 1;
 
-        const betAreaId         = args.id;
-        const actualWidth       = args.Size.Width - tableData.defaultBorderSize;
-        const actualHeight      = args.Size.Height - tableData.defaultBorderSize;
-        const borderSize        = args.BorderSize || tableData.defaultBorderSize;
-        const normalAlpha       = args.BackColorAlpha || tableData.defaultBackColorAlpha;
-        const highlightList     = args.Highlight ? args.Highlight : {};
+        const betAreaId = args.id;
+        const actualWidth = args.Size.Width - this.currentTable.defaultBorderSize;
+        const actualHeight = args.Size.Height - this.currentTable.defaultBorderSize;
+        const borderSize = args.BorderSize || this.currentTable.defaultBorderSize;
+        const normalAlpha = args.BackColorAlpha || this.currentTable.defaultBackColorAlpha;
+        const highlightList = args.Highlight ? args.Highlight : {};
         const betAreasRowsCells = betTable['BetAreasRows'][String(this.currentRow)].length || 0;
 
         // CALL BACKS
         // * Can use default callbacks or your own!
-        const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeBetClick;
-        const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.multiBetHoverInShapes;
+        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeBetClick;
+        const hoverInCallBack = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.multiBetHoverInShapes;
         const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.multiBetHoverOutShapes;
 
         // SET Chip Map
@@ -358,14 +425,14 @@ class App extends Component {
 
         const Cell = new PIXI.Graphics();
 
-        // `tableData.Development.IS_DEBUG_MODE` debugging mode for grid
-        Cell.beginFill('0x' + "#66ccff".replace('#', ''), tableData.Development.IS_DEBUG_MODE ? normalAlpha : 0);
-        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''), tableData.Development.IS_DEBUG_MODE ? normalAlpha : 0);
+        // `this.currentTable.Development.IS_DEBUG_MODE` debugging mode for grid
+        Cell.beginFill('0x' + "#66ccff".replace('#', ''), this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0);
+        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''), this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0);
         Cell.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
         Cell.endFill();
 
         Cell.interactive = true;
-        Cell.buttonMode  = true;
+        Cell.buttonMode = true;
 
         Cell
             .on('pointertap', clickCallBack.bind(this))
@@ -380,22 +447,22 @@ class App extends Component {
 
         // This is required to map all shapes
         this.setShapeMap(betAreaId, {
-            Config:          {
+            Config: {
                 HighlightShape: false,
             },
-            Shape:           {
-                Width:                actualWidth,
-                Height:               actualHeight,
-                X:                    this.currentX,
-                Y:                    this.currentY,
-                NormalBorderSize:     borderSize,
+            Shape: {
+                Width: actualWidth,
+                Height: actualHeight,
+                X: this.currentX,
+                Y: this.currentY,
+                NormalBorderSize: borderSize,
                 NornalBackColorAlpha: normalAlpha,
-                Graphic:              Cell
+                Graphic: Cell
             },
             HighlightShapes: highlightList,
-            Id:              betAreaId,
-            Row:             this.currentRow,
-            Index:           this.currentIndex
+            Id: betAreaId,
+            Row: this.currentRow,
+            Index: this.currentIndex
         })
 
         // This is required to access it on event handler
@@ -405,7 +472,7 @@ class App extends Component {
         if (betAreasRowsCells == this.currentIndex) {
             this.currentRow += 1;
             this.currentY += actualHeight;
-            this.currentX     = 10;
+            this.currentX = 10;
             this.currentIndex = 0;
         }
     }
@@ -413,36 +480,36 @@ class App extends Component {
     makeTableItem(args) {
         this.currentIndex += 1;
 
-        const mainShapeId      = args.id;
-        const actualWidth      = args.Size.Width - tableData.defaultBorderSize;
-        const actualHeight     = args.Size.Height - tableData.defaultBorderSize;
-        const fontSize         = args.FontSize || tableData.defaultFontSize;
-        const fontFamily       = args.FontFamily || tableData.defaultFontFamily;
-        const fontThickness    = args.FontThickness || tableData.defaultFontThickness;
-        const fontWeight       = args.FontWeight || tableData.defaultFontWeight;
-        const borderSize       = args.BorderSize || tableData.defaultBorderSize;
-        const normalAlpha      = args.BackColorAlpha || tableData.defaultBackColorAlpha;
-        const hoverBackColor   = args.HoverBackColor || tableData.defaultHoverBackColor;
-        const hoverBorderColor = args.HoverBorderColor || tableData.defaultHoverBorderColor;
-        const hoverAlpha       = args.HoverBackColorAlpha || tableData.defaultHoverBackColorAlpha;
-        const highlightList    = args.Highlight ? args.Highlight : {};
+        const mainShapeId = args.id;
+        const actualWidth = args.Size.Width - this.currentTable.defaultBorderSize;
+        const actualHeight = args.Size.Height - this.currentTable.defaultBorderSize;
+        const fontSize = args.FontSize || this.currentTable.defaultFontSize;
+        const fontFamily = args.FontFamily || this.currentTable.defaultFontFamily;
+        const fontThickness = args.FontThickness || this.currentTable.defaultFontThickness;
+        const fontWeight = args.FontWeight || this.currentTable.defaultFontWeight;
+        const borderSize = args.BorderSize || this.currentTable.defaultBorderSize;
+        const normalAlpha = args.BackColorAlpha || this.currentTable.defaultBackColorAlpha;
+        const hoverBackColor = args.HoverBackColor || this.currentTable.defaultHoverBackColor;
+        const hoverBorderColor = args.HoverBorderColor || this.currentTable.defaultHoverBorderColor;
+        const hoverAlpha = args.HoverBackColorAlpha || this.currentTable.defaultHoverBackColorAlpha;
+        const highlightList = args.Highlight ? args.Highlight : {};
 
         // CALL BACKS
         // * Can use default callbacks or your own!
-        const clickCallBack    = args.Events && args.Events.Click ? this[String(args.Events.Click)] : this.onShapeBetClick;
-        const hoverInCallBack  = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : this.onShapeBetHoverIN;
-        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : this.onShapeBetHoverOUT;
+        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : () => {};
+        const hoverInCallBack = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : () => {};
+        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : () => {};
 
-        const shapeStr   = args.Text || "";
-        const textHoriz  = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
-        const textVerti  = this.currentY + (actualHeight / 2)
+        const shapeStr = args.Text || "";
+        const textHoriz = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
+        const textVerti = this.currentY + (actualHeight / 2)
         const textConfig = {
-            fontWeight:      fontWeight,
-            fontSize:        fontSize,
-            fontFamily:      fontFamily,
-            fill:            args.TextColor,
-            align:           'center',
-            stroke:          args.TextColor,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            fontFamily: fontFamily,
+            fill: args.TextColor,
+            align: 'center',
+            stroke: args.TextColor,
             strokeThickness: fontThickness
         }
 
@@ -451,8 +518,10 @@ class App extends Component {
             Amount: 0
         });
 
-        const Shape     = new PIXI.Graphics();
-        const shapeText = new PIXI.Text(shapeStr, textConfig);
+        const getPreviousShapeMap = this.getShapesMap(mainShapeId);
+
+        const Shape = (getPreviousShapeMap && getPreviousShapeMap.Shape.Graphic) ? getPreviousShapeMap.Shape.Graphic : new PIXI.Graphics();
+        const shapeText = (getPreviousShapeMap && getPreviousShapeMap.Text.TextObj) ? getPreviousShapeMap.Text.TextObj : new PIXI.Text(shapeStr, textConfig);
 
         // Make Shape
         Shape.beginFill('0x' + args.BackColor.replace('#', ''), normalAlpha);
@@ -467,9 +536,9 @@ class App extends Component {
 
         // Create Interactivity
         shapeText.interactive = true;
-        shapeText.buttonMode  = true;
-        Shape.interactive     = true;
-        Shape.buttonMode      = true;
+        shapeText.buttonMode = true;
+        Shape.interactive = true;
+        Shape.buttonMode = true;
 
         // Event Handlers
         Shape
@@ -477,82 +546,53 @@ class App extends Component {
 
         Shape
             .on('pointerout', hoverOUTCallBack.bind(this));
-        //
-        // Shape
-        //     .on('pointertap', clickCallBack.bind(this));
 
         this.pixiTableDesign.stage.addChild(Shape, shapeText);
 
-        // this.currentMiniCellX = this.currentX;
-        // this.currentMiniCellY = this.currentY;
-        // this.currentMiniCellIndex = 0;
-        //
-        //
-        // betAreas.map(curBetArea => {
-        //     this.currentMiniCellIndex += 1
-        //     const cellWidth = actualWidth / 3
-        //     const cellHeight = actualHeight / 3
-        //
-        //     const Cell = new PIXI.Graphics();
-        //     Cell.beginFill('0x' + "#66ccff".replace('#', ''), normalAlpha);
-        //     Cell.lineStyle(borderSize, "#4dc3ff".replace('#', ''));
-        //     Cell.drawRect(this.currentMiniCellX, this.currentMiniCellY, cellWidth, cellHeight);
-        //     Cell.endFill();
-        //
-        //     this.currentMiniCellX += cellWidth;
-        //     if(betAreasRowsCells == this.currentMiniCellIndex) {
-        //         this.currentMiniCellY += cellHeight;
-        //         this.currentMiniCellX = this.currentX;
-        //         this.currentMiniCellIndex = 0;
-        //     }
-        //
-        //     this.pixiTableDesign.stage.addChild(Cell);
-        // })
-
         // This is required to map all shapes
         this.setShapeMap(mainShapeId, {
-            Config:          {
+            Config: {
                 HighlightShape: true,
             },
-            Shape:           {
-                Width:                actualWidth,
-                Height:               actualHeight,
-                X:                    this.currentX,
-                Y:                    this.currentY,
-                NormalBorderSize:     borderSize,
-                NormalBorderColor:    '0x' + args.Border.replace('#', ''),
-                NormalBackColor:      '0x' + args.BackColor.replace('#', ''),
+            Shape: {
+                Width: actualWidth,
+                Height: actualHeight,
+                X: this.currentX,
+                Y: this.currentY,
+                NormalBorderSize: borderSize,
+                NormalBorderColor: '0x' + args.Border.replace('#', ''),
+                NormalBackColor: '0x' + args.BackColor.replace('#', ''),
                 NornalBackColorAlpha: normalAlpha,
-                HoverBorderSize:      borderSize,
-                HoverBackColor:       '0x' + hoverBackColor.replace('#', ''),
-                HoverBackColorAlpha:  hoverAlpha,
-                HoverBorderColor:     '0x' + hoverBorderColor.replace('#', ''),
-                Graphic:              Shape
+                HoverBorderSize: borderSize,
+                HoverBackColor: '0x' + hoverBackColor.replace('#', ''),
+                HoverBackColorAlpha: hoverAlpha,
+                HoverBorderColor: '0x' + hoverBorderColor.replace('#', ''),
+                Graphic: Shape
             },
-            Text:            {
-                String:  shapeStr,
-                X:       textHoriz,
-                Y:       textVerti,
+            Text: {
+                String: shapeStr,
+                X: textHoriz,
+                Y: textVerti,
                 TextObj: shapeText,
             },
             HighlightShapes: highlightList,
-            Id:              mainShapeId,
-            Row:             this.currentRow,
-            Index:           this.currentIndex
+            Id: mainShapeId,
+            Row: this.currentRow,
+            Index: this.currentIndex
         })
 
         // This is required to access it on event handler
-        Shape.shapeMap     = this.getShapesMap(mainShapeId);
+        Shape.shapeMap = this.getShapesMap(mainShapeId);
         shapeText.shapeMap = this.getShapesMap(mainShapeId);
 
         // Next X cord ->
         this.currentX += actualWidth;
-        if (tableData['MaxPerRow'][String(this.currentRow)] == this.currentIndex) {
+        if (this.currentTable['MaxPerRow'][String(this.currentRow)] == this.currentIndex) {
             this.currentY += actualHeight;
             this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
-            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * tableData['MaxPerRow'][String(this.currentRow)])) + "px");
+            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * this.currentTable['MaxPerRow'][String(this.currentRow)])) + "px");
             this.currentRow += 1;
-            this.currentX     = 0;
+            this.currentX = 0;
             this.currentIndex = 0;
         }
     }
@@ -561,9 +601,14 @@ class App extends Component {
     // BUILD TABLE >>
     //======================================
 
+    switchBuiltTable(){
+        this.buildTableBackground();
+        this.buildTableBetGrid();
+    }
+
     buildTable() {
-        this.shapesMap     = {};
-        this.betHistory    = [];
+        this.shapesMap = {};
+        this.betHistory = [];
         this.chipAmountMap = {};
 
         this.setChipValue(100);
@@ -573,20 +618,20 @@ class App extends Component {
     }
 
     buildTableBackground() {
-        this.currentY     = 0;
-        this.currentX     = 0;
-        this.currentRow   = 1;
+        this.currentY = 0;
+        this.currentX = 0;
+        this.currentRow = 1;
         this.currentIndex = 0;
 
-        Object.keys(tableData['Rows']).forEach((curRow, index) => {
-            tableData['Rows'][curRow].map(this.makeTableItem.bind(this))
+        Object.keys(this.currentTable['Rows']).forEach((curRow, index) => {
+            this.currentTable['Rows'][curRow].map(this.makeTableItem.bind(this))
         })
     }
 
     buildTableBetGrid() {
-        this.currentY     = 15;
-        this.currentX     = 10;
-        this.currentRow   = 1;
+        this.currentY = 15;
+        this.currentX = 10;
+        this.currentRow = 1;
         this.currentIndex = 0;
 
         Object.keys(betTable['BetAreasRows']).forEach((curRow, index) => {
@@ -595,7 +640,7 @@ class App extends Component {
     }
 
     createPixiCanvas() {
-        this.pixiTableDesign     = new PIXI.Application(900, 295);
+        this.pixiTableDesign = new PIXI.Application(900, 295);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         const TableContainer = document.querySelector('#App')
@@ -628,10 +673,16 @@ class App extends Component {
     //======================================
 
     render() {
+        this.switchTable(classicTable, false);
+
         return (
             <div id="App" className="App">
                 <div className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</div>
                 <div className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</div>
+                <div className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</div>
+                <div className="repeatBet" onClick={this.doubleBets.bind(this)}>Double Bet</div>
+                <div className="switchClassic" onClick={this.switchTable.bind(this, classicTable)}>Switch Classic</div>
+                <div className="switchTransparent" onClick={this.switchTable.bind(this, transparentTable)}>Switch Transparent</div>
             </div>
         );
     }

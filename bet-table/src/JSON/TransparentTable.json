@@ -1,6 +1,6 @@
 {
   "Development": {
-    "IS_DEBUG_MODE": true
+    "IS_DEBUG_MODE": false
   },
   "defaultBorderSize": 1,
   "defaultFontSize": 12,
@@ -23,7 +23,7 @@
       {
         "id": 1,
         "Text": "1",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#f9fbf5",
         "Events": {
@@ -39,7 +39,7 @@
         "Text": "2",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -48,9 +48,9 @@
       {
         "id": 3,
         "Text": "3",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -61,7 +61,7 @@
         "Text": "4",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -70,9 +70,9 @@
       {
         "id": 5,
         "Text": "5",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -83,7 +83,7 @@
         "Text": "6",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -92,9 +92,9 @@
       {
         "id": 7,
         "Text": "7",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -105,7 +105,7 @@
         "Text": "8",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -114,9 +114,9 @@
       {
         "id": 9,
         "Text": "9",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -127,7 +127,7 @@
         "Text": "10",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -136,9 +136,9 @@
       {
         "id": 11,
         "Text": "11",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -149,7 +149,7 @@
         "Text": "12",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -162,7 +162,7 @@
         "Text": "13",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -171,9 +171,9 @@
       {
         "id": 14,
         "Text": "14",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -184,7 +184,7 @@
         "Text": "15",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -193,9 +193,9 @@
       {
         "id": 16,
         "Text": "16",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -206,7 +206,7 @@
         "Text": "17",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -215,9 +215,9 @@
       {
         "id": 18,
         "Text": "18",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -228,7 +228,7 @@
         "Text": "19",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -237,9 +237,9 @@
       {
         "id": 20,
         "Text": "20",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -250,7 +250,7 @@
         "Text": "21",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -259,9 +259,9 @@
       {
         "id": 22,
         "Text": "22",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -272,7 +272,7 @@
         "Text": "23",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -281,9 +281,9 @@
       {
         "id": 24,
         "Text": "24",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -294,9 +294,9 @@
       {
         "id": 25,
         "Text": "25",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -307,7 +307,7 @@
         "Text": "26",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -316,9 +316,9 @@
       {
         "id": 27,
         "Text": "27",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -329,7 +329,7 @@
         "Text": "28",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -338,9 +338,9 @@
       {
         "id": 29,
         "Text": "29",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -351,7 +351,7 @@
         "Text": "30",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -360,9 +360,9 @@
       {
         "id": 31,
         "Text": "31",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -373,7 +373,7 @@
         "Text": "32",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -382,9 +382,9 @@
       {
         "id": 33,
         "Text": "33",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -395,7 +395,7 @@
         "Text": "34",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -404,9 +404,9 @@
       {
         "id": 35,
         "Text": "35",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -417,7 +417,7 @@
         "Text": "36",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 60
@@ -430,7 +430,7 @@
         "Text": "1st12",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Events": {
           "HoverIN": "multiBetHoverInShapes",
           "HoverOUT": "multiBetHoverOutShapes"
@@ -450,9 +450,9 @@
       {
         "id": 38,
         "Text": "2nd12",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 237
@@ -463,7 +463,7 @@
         "Text": "3rd12",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 237
@@ -474,9 +474,9 @@
       {
         "id": 40,
         "Text": "1-18",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
@@ -487,7 +487,7 @@
         "Text": "EVEN",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
@@ -496,9 +496,9 @@
       {
         "id": 42,
         "Text": "50",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
@@ -509,7 +509,7 @@
         "Text": "51",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
@@ -518,9 +518,9 @@
       {
         "id": 44,
         "Text": "ODD",
-        "BackColor": "#cb231f",
+        "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
@@ -531,7 +531,7 @@
         "Text": "19-36",
         "BackColor": "#0c0704",
         "TextColor": "white",
-        "Border": "#F9FBF5",
+        "Border": "#cb231f",
         "Size": {
           "Height": 60,
           "Width": 119
