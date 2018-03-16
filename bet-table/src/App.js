@@ -184,15 +184,6 @@ class App extends Component {
                     this.makeBet(this.getShapesMap(universalKey));
                 }
             })
-        }else if(this.betHistory.length){
-
-            this.betHistory.map(bet => {
-                const universalKey = bet.MapKey;
-
-                if(universalKey){
-                    this.makeBet(this.getShapesMap(universalKey));
-                }
-            })
         }
     }
 
@@ -263,10 +254,10 @@ class App extends Component {
         const chipX = shapeMap.Shape.X + (shapeMap.Shape.Width / 2);
         const chipY = shapeMap.Shape.Y + (shapeMap.Shape.Height / 2);
 
-        if (chipModel && chipMapped.Amount > 0) {
+        if (chipModel && chipText && chipMapped.Amount > 0) {
             chipModel.image = chipPath
             chipText.text = chipNewAmount;
-        } else {
+        } else if(chipModel && chipText) {
 
             // ADD CHIP
             chipModel.width = chipWidth
@@ -279,10 +270,11 @@ class App extends Component {
 
             chipModel.anchor.set(0.5)
             chipText.anchor.set(0.5);
-
-            this.pixiTableDesign.stage.addChild(chipModel, chipText);
         }
 
+        if(chipModel && chipText) {
+            this.pixiTableDesign.stage.addChild(chipModel, chipText);
+        }
 
         const newShapeMapped = Object.assign(this.getShapesMap(universalKey), {
             Chip: {
@@ -442,6 +434,7 @@ class App extends Component {
 
         Cell
             .on('pointerout', hoverOUTCallBack.bind(this))
+
 
         this.pixiTableDesign.stage.addChild(Cell);
 
@@ -640,8 +633,22 @@ class App extends Component {
     }
 
     createPixiCanvas() {
-        this.pixiTableDesign = new PIXI.Application(900, 295);
+
+        // create app pixi
+        this.pixiTableDesign = new PIXI.Application(900,295);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+        // render as webgl
+        this.pixiTableDesignRender = new PIXI.WebGLRenderer({
+            width: 900,
+            height: 295,
+            resolution: "16:9",
+            autoResize: true,
+            transparent: true
+        })
+        // setup interactions by 1s delay
+        this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesignRender, {
+            interactionFrequency: 1000
+        })
 
         const TableContainer = document.querySelector('#App')
 
