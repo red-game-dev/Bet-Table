@@ -472,7 +472,7 @@ class App extends Component {
         if (betAreasRowsCells == this.currentIndex) {
             this.currentRow += 1;
             this.currentY += actualHeight;
-            this.currentX = 10;
+            this.currentX = 0;
             this.currentIndex = 0;
         }
     }
@@ -630,7 +630,7 @@ class App extends Component {
 
     buildTableBetGrid() {
         this.currentY = 15;
-        this.currentX = 10;
+        this.currentX = 0;
         this.currentRow = 1;
         this.currentIndex = 0;
 

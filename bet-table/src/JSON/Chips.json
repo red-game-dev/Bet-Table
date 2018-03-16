@@ -13,12 +13,12 @@
     "defaultChip": "./Images/Chips/chip9.svg"
   },
   "ChipConfig":{
-    "Width": 29.5,
-    "Height": 29.5
+    "Width": 25.5,
+    "Height": 25.5
   },
   "ChipTextConfig": {
     "defaultWeight": "normal",
-    "defaultSize": 12,
+    "defaultSize": 8,
     "defaultFamily": "Arial, Helvetica, sans-serif",
     "defaultColor": "#f9fbf5",
     "defaultStroke": "#f9fbf5",
