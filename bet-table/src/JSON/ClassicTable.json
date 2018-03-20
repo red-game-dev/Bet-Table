@@ -1,6 +1,10 @@
 {
   "Development": {
-    "IS_DEBUG_MODE": true
+    "IS_DEBUG_MODE": false,
+    "Grid": {
+      "Background": "#66ccff",
+      "BorderColor": "#04080c"
+    }
   },
   "defaultBorderSize": 1,
   "defaultFontSize": 12,
@@ -26,9 +30,6 @@
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#f9fbf5",
-        "Events": {
-          "Click": "onShapeBetClick"
-        },
         "Size": {
           "Height": 60,
           "Width": 60
@@ -431,20 +432,9 @@
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",
-        "Events": {
-          "HoverIN": "multiBetHoverInShapes",
-          "HoverOUT": "multiBetHoverOutShapes"
-        },
         "Size": {
           "Height": 60,
           "Width": 237
-        },
-        "Highlight": {
-          "1": [1, 2, 3],
-          "2": [24,23],
-          "3": [31,32],
-          "4": [],
-          "5": [40]
         }
       },
       {

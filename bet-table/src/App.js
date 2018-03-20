@@ -29,10 +29,8 @@ import './App.css';
 // .on('touchendoutside', onButtonUp)
 
 // WHAT IS LEFT
-// 2. Place Bets on more parts on each slot
-// 3. Make the table look the same as origianl (Introducing Also Assets on Background, only if it has)
-// 4. Use real chips for test
-// 5. Refactor parts the right way (Is shiity atm, due is only made for simulation)
+// 1. Make the table look the same as origianl (Introducing Also Assets on Background, only if it has)
+// 2. Refactor parts the right way (Is shiity atm, due is only made for simulation)
 
 class App extends Component {
 
@@ -65,11 +63,15 @@ class App extends Component {
     //================================
 
     getChipAmountMap(key) {
-        return this.chipAmountMap[String(key).replace(' ', '_')];
+        return this.chipAmountMap[String(key).replace(' ', '_')] || {};
     }
 
     setCipAmountMap(key, list) {
-        this.chipAmountMap[String(key).replace(' ', '_')] = list;
+        if(typeof list != "object"){
+            throw new Error("setCipAmountMap requires key and list to assign")
+            return
+        }
+        this.chipAmountMap[String(key).replace(' ', '_')] = list
     }
 
     getChipValue() {
@@ -85,6 +87,10 @@ class App extends Component {
     }
 
     setShapeMap(key, list) {
+        if(typeof list != "object"){
+            throw new Error("setShapeMap requires key and list to assign")
+            return
+        }
         this.shapesMap[String(key).replace(' ', '_')] = list;
     }
 
@@ -93,7 +99,55 @@ class App extends Component {
     }
 
     setBetHistory(list) {
+        if(typeof list != "object"){
+            throw new Error("setBetHistory accept 1 paramter as object")
+            return
+        }
         this.betHistory.push(list)
+    }
+
+    destroyModel(models){
+        if(typeof models != "object"){
+            throw new Error("DestroyModel accept 1 paramter as array - Use shapeMap.Chip")
+            return
+        }
+        if(models.length > 0) {
+            models.map(model => model.destroy())
+        }
+    }
+
+    getChipModel(shapeMap){
+        if(typeof shapeMap != "object"){
+            throw new Error("getChipModel accept 1 paramter as array - Use shapeMap")
+            return
+        }
+        return shapeMap.Chip;
+    }
+
+    getChipImage(totalChipBet){
+        const chipPath = chipData.ChipPaths[String(totalChipBet)]
+
+        return chipPath ? chipPath: chipData.ChipPaths.defaultChip;
+    }
+
+    getObjectKeys(obj){
+        if(typeof obj != "object"){
+            throw new Error("getObjectKeys accept 1 paramter as object")
+            return
+        }
+        return Object.keys(obj);
+    }
+
+    //========================
+    // DRAW SHAPE
+    //========================
+    drawRectangle({
+                      Shape, LeftX, TopY, Width, Height, Background,Transparency, BorderSize, BorderColor, BorderTransparency = 1
+                  }){
+        Shape.beginFill(Background, Transparency);
+        Shape.lineStyle(BorderSize, BorderColor, BorderTransparency);
+        Shape.drawRect(LeftX, TopY, Width, Height);
+        Shape.endFill();
     }
 
     //========================
@@ -106,32 +160,28 @@ class App extends Component {
         if (lastBet) {
             const universalKey = lastBet.MapKey;
             const shapeMapped = this.getShapesMap(universalKey)
-            const chipText = shapeMapped.Chip.ChipText;
-            const chipModel = shapeMapped.Chip.ChipModel;
-            const currentBetAmount = Number(chipText.text);
+            const Models = this.getChipModel(shapeMapped);
+            const currentBetAmount = Number(Models.ChipText.text);
             const previousBetAmount = currentBetAmount - lastBet.Amount;
 
-            if (chipText && chipModel) {
+            if (Models.ChipText && Models.ChipModel) {
 
                 if (previousBetAmount > 0) {
-                    const path = chipData.ChipPaths[String(previousBetAmount)];
-                    const chipPath = path ? path : chipData.ChipPaths.defaultChip;
+                    const chipPath = this.getChipImage(previousBetAmount);
 
-                    chipModel.image = PIXI.Sprite.fromImage(chipPath);
-                    chipText.text = previousBetAmount;
+                    Models.ChipModel.texture = new PIXI.Texture.fromImage(chipPath)
+                    Models.ChipText.text = previousBetAmount;
 
                     this.setCipAmountMap(universalKey, {
                         Amount: previousBetAmount
                     })
                 } else {
-                    if (chipModel) {
-                        chipModel.destroy()
-                    }
-                    if (chipText) {
-                        chipText.destroy();
-                    }
+                    this.destroyModel([
+                        Models.ChipModel,
+                        Models.ChipText
+                    ]);
 
-                    const newShapeMapped = Object.assign(this.getShapesMap(universalKey).Chip, {});
+                    const newShapeMapped = Object.assign(Models, {});
                     this.setShapeMap(universalKey, newShapeMapped)
                     this.setCipAmountMap(universalKey, {
                         Amount: 0
@@ -151,20 +201,18 @@ class App extends Component {
         this.betHistory = [];
 
         betHistory.map(currentBet => {
-            console.log(currentBet)
             if (currentBet.MapKey) {
                 const universalKey = currentBet.MapKey;
                 const shapeMapped = this.getShapesMap(universalKey)
+                const Models = this.getChipModel(shapeMapped);
 
-                if (shapeMapped.Chip) {
-                    if (shapeMapped.Chip.ChipText) {
-                        shapeMapped.Chip.ChipText.destroy();
-                    }
-                    if (shapeMapped.Chip.ChipModel) {
-                        shapeMapped.Chip.ChipModel.destroy();
-                    }
+                if (Models) {
+                    this.destroyModel([
+                        Models.ChipText,
+                        Models.ChipModel
+                    ])
 
-                    const newShapeMapped = Object.assign(this.getShapesMap(universalKey).Chip, {});
+                    const newShapeMapped = Object.assign(Models, {});
                     this.setShapeMap(universalKey, newShapeMapped)
                     this.setCipAmountMap(universalKey, {
                         Amount: 0
@@ -194,7 +242,6 @@ class App extends Component {
                 const universalKey = bet.MapKey;
 
                 const chipMapped = this.getChipAmountMap(universalKey);
-                const chipNewAmount = chipMapped.Amount * 2;
 
                 if(universalKey){
                     this.makeBet(this.getShapesMap(universalKey));
@@ -206,7 +253,6 @@ class App extends Component {
                 const universalKey = bet.MapKey;
 
                 const chipMapped = this.getChipAmountMap(universalKey);
-                const chipNewAmount = chipMapped.Amount * 2;
 
                 if(universalKey){
                     this.makeBet(this.getShapesMap(universalKey));
@@ -216,15 +262,13 @@ class App extends Component {
     }
 
     makeBet(shapeMap){
-        const Shape = shapeMap.Shape.Graphic;
-        const BetAreas = shapeMap.BetAreas;
-
-        const fontWeight = chipData.ChipTextConfig.defaultWeight;
-        const fontSize = chipData.ChipTextConfig.defaultSize;
-        const fontFamily = chipData.ChipTextConfig.defaultFamily;
-        const fontColor = chipData.ChipTextConfig.defaultColor;
-        const fontStroke = chipData.ChipTextConfig.defaultStroke;
-        const fontThickness = chipData.ChipTextConfig.defaultThickness;
+        const chipConfig = chipData.ChipTextConfig;
+        const fontWeight = chipConfig.defaultWeight;
+        const fontSize = chipConfig.defaultSize;
+        const fontFamily = chipConfig.defaultFamily;
+        const fontColor = chipConfig.defaultColor;
+        const fontStroke = chipConfig.defaultStroke;
+        const fontThickness = chipConfig.defaultThickness;
 
         const universalKey = String(shapeMap.Id);
         const chipMapped = this.getChipAmountMap(universalKey);
@@ -233,10 +277,9 @@ class App extends Component {
         // increase chip amount
         const chipNewAmount = chipMapped.Amount + chipAmount;
 
-        const path = chipData.ChipPaths[String(chipNewAmount)];
-        const chipPath = path ? path : chipData.ChipPaths.defaultChip;
+        const chipPath = this.getChipImage(chipNewAmount);
 
-        const chipModel = shapeMap.Chip ? shapeMap.Chip.ChipModel : PIXI.Sprite.fromImage(chipPath);
+        const chipModel = shapeMap.Chip ? shapeMap.Chip.ChipModel : new PIXI.Sprite.fromImage(chipPath);
         const chipText = shapeMap.Chip ? shapeMap.Chip.ChipText : new PIXI.Text(String(chipAmount), {
             fontWeight: fontWeight,
             fontSize: fontSize,
@@ -255,18 +298,18 @@ class App extends Component {
         const chipY = shapeMap.Shape.Y + (shapeMap.Shape.Height / 2);
 
         if (chipModel && chipText && chipMapped.Amount > 0) {
-            chipModel.image = chipPath
+            chipModel.texture = new PIXI.Texture.fromImage(chipPath)
             chipText.text = chipNewAmount;
         } else if(chipModel && chipText) {
 
             // ADD CHIP
-            chipModel.width = chipWidth
-            chipModel.height = chipHeight
+            chipModel.width = chipWidth;
+            chipModel.height = chipHeight;
             chipModel.x = chipX;
             chipModel.y = chipY;
 
-            chipText.x = chipX
-            chipText.y = chipY
+            chipText.x = chipX;
+            chipText.y = chipY;
 
             chipModel.anchor.set(0.5)
             chipText.anchor.set(0.5);
@@ -296,6 +339,9 @@ class App extends Component {
     }
 
     switchTable(tableData, allowRefresh) {
+        if(tableData == this.currentTable)
+            return;
+
         this.currentTable = tableData;
         this.beforeRefreshHistory = this.betHistory;
 
@@ -312,22 +358,38 @@ class App extends Component {
 
     onShapeBetHoverIN(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
+        const ShapeCtx = shapeMap.Shape.Graphic;
+        const ShapeProperties = shapeMap.Shape
 
-        Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
-        Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
-        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-        Shape.endFill();
+        this.drawRectangle({
+                Shape: ShapeCtx,
+                LeftX: ShapeProperties.X,
+                TopY: ShapeProperties.Y,
+                Width: ShapeProperties.Width,
+                Height: ShapeProperties.Height,
+                Background: ShapeProperties.HoverBackColor,
+                Transparency: ShapeProperties.HoverBackColorAlpha,
+                BorderSize: ShapeProperties.HoverBorderSize,
+                BorderColor: ShapeProperties.HoverBorderColor
+        })
     }
 
     onShapeBetHoverOUT(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
+        const ShapeCtx = shapeMap.Shape.Graphic;
+        const ShapeProperties =  shapeMap.Shap;
 
-        Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
-        Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
-        Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-        Shape.endFill();
+        this.drawRectangle({
+            Shape: ShapeCtx,
+            LeftX: ShapeProperties.X,
+            TopY: ShapeProperties.Y,
+            Width: ShapeProperties.Width,
+            Height: ShapeProperties.Height,
+            Background: ShapeProperties.NormalBackColor,
+            Transparency: ShapeProperties.NornalBackColorAlpha,
+            BorderSize: ShapeProperties.NormalBorderSize,
+            BorderColor: ShapeProperties.NormalBorderColor
+        })
     }
 
     onShapeBetClick(event) {
@@ -340,51 +402,52 @@ class App extends Component {
 
     multiBetHoverInShapes(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
         const highlightList = shapeMap.HighlightShapes;
 
 
-        if (shapeMap.Config.HighlightShape) {
-            Shape.beginFill(shapeMap.Shape.HoverBackColor, shapeMap.Shape.HoverBackColorAlpha);
-            Shape.lineStyle(shapeMap.Shape.HoverBorderSize, shapeMap.Shape.HoverBorderColor);
-            Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-            Shape.endFill();
-        }
-
-        Object.keys(highlightList).forEach((row, index) => {
+        this.getObjectKeys(highlightList).forEach((row, index) => {
             highlightList[row].map(shapeId => {
                 const getShapeMapped = this.getShapesMap(shapeId);
-                const shapeGraphic = getShapeMapped.Shape.Graphic;
+                const ShapeCtx = getShapeMapped.Shape.Graphic;
+                const ShapeProperties = getShapeMapped.Shape;
 
-                shapeGraphic.beginFill(getShapeMapped.Shape.HoverBackColor, getShapeMapped.Shape.HoverBackColorAlpha);
-                shapeGraphic.lineStyle(getShapeMapped.Shape.HoverBorderSize, getShapeMapped.Shape.HoverBorderColor);
-                shapeGraphic.drawRect(getShapeMapped.Shape.X, getShapeMapped.Shape.Y, getShapeMapped.Shape.Width, getShapeMapped.Shape.Height);
-                shapeGraphic.endFill();
+                this.drawRectangle({
+                    Shape: ShapeCtx,
+                    LeftX: ShapeProperties.X,
+                    TopY: ShapeProperties.Y,
+                    Width: ShapeProperties.Width,
+                    Height: ShapeProperties.Height,
+                    Background: ShapeProperties.HoverBackColor,
+                    Transparency: ShapeProperties.HoverBackColorAlpha,
+                    BorderSize: ShapeProperties.HoverBorderSize,
+                    BorderColor: ShapeProperties.HoverBorderColor
+                })
+
             })
         })
     }
 
     multiBetHoverOutShapes(event) {
         const shapeMap = event.currentTarget.shapeMap;
-        const Shape = shapeMap.Shape.Graphic;
         const highlightList = shapeMap.HighlightShapes;
 
-        if (shapeMap.Config.HighlightShape) {
-            Shape.beginFill(shapeMap.Shape.NormalBackColor, shapeMap.Shape.NornalBackColorAlpha);
-            Shape.lineStyle(shapeMap.Shape.NormalBorderSize, shapeMap.Shape.NormalBorderColor);
-            Shape.drawRect(shapeMap.Shape.X, shapeMap.Shape.Y, shapeMap.Shape.Width, shapeMap.Shape.Height);
-            Shape.endFill();
-        }
-
-        Object.keys(highlightList).forEach((row, index) => {
+        this.getObjectKeys(highlightList).forEach((row, index) => {
             highlightList[row].map(shapeId => {
                 const getShapeMapped = this.getShapesMap(shapeId);
-                const shapeGraphic = getShapeMapped.Shape.Graphic;
+                const ShapeCtx = getShapeMapped.Shape.Graphic;
+                const ShapeProperties =  getShapeMapped.Shape;
 
-                shapeGraphic.beginFill(getShapeMapped.Shape.NormalBackColor, getShapeMapped.Shape.NornalBackColorAlpha);
-                shapeGraphic.lineStyle(getShapeMapped.Shape.NormalBorderSize, getShapeMapped.Shape.NormalBorderColor);
-                shapeGraphic.drawRect(getShapeMapped.Shape.X, getShapeMapped.Shape.Y, getShapeMapped.Shape.Width, getShapeMapped.Shape.Height);
-                shapeGraphic.endFill();
+                this.drawRectangle({
+                    Shape: ShapeCtx,
+                    LeftX: ShapeProperties.X,
+                    TopY: ShapeProperties.Y,
+                    Width: ShapeProperties.Width,
+                    Height: ShapeProperties.Height,
+                    Background: ShapeProperties.NormalBackColor,
+                    Transparency: ShapeProperties.NornalBackColorAlpha,
+                    BorderSize: ShapeProperties.NormalBorderSize,
+                    BorderColor: ShapeProperties.NormalBorderColor
+                })
             })
         })
     }
@@ -418,10 +481,18 @@ class App extends Component {
         const Cell = new PIXI.Graphics();
 
         // `this.currentTable.Development.IS_DEBUG_MODE` debugging mode for grid
-        Cell.beginFill('0x' + "#66ccff".replace('#', ''), this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0);
-        Cell.lineStyle(borderSize, '0x' + "#04080c".replace('#', ''), this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0);
-        Cell.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
-        Cell.endFill();
+        this.drawRectangle({
+            Shape: Cell,
+            LeftX: this.currentX,
+            TopY: this.currentY,
+            Width: actualWidth,
+            Height: actualHeight,
+            Background: '0x' + this.currentTable.Development.Grid.Background.replace('#', ''),
+            Transparency: this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0,
+            BorderSize: borderSize,
+            BorderColor: '0x' + this.currentTable.Development.Grid.BorderColor.replace('#', ''),
+            BorderTransparency: this.currentTable.Development.IS_DEBUG_MODE ? normalAlpha : 0
+        })
 
         Cell.interactive = true;
         Cell.buttonMode = true;
@@ -517,10 +588,18 @@ class App extends Component {
         const shapeText = (getPreviousShapeMap && getPreviousShapeMap.Text.TextObj) ? getPreviousShapeMap.Text.TextObj : new PIXI.Text(shapeStr, textConfig);
 
         // Make Shape
-        Shape.beginFill('0x' + args.BackColor.replace('#', ''), normalAlpha);
-        Shape.lineStyle(borderSize, '0x' + args.Border.replace('#', ''));
-        Shape.drawRect(this.currentX, this.currentY, actualWidth, actualHeight);
-        Shape.endFill();
+        this.drawRectangle({
+            Shape: Shape,
+            LeftX: this.currentX,
+            TopY: this.currentY,
+            Width: actualWidth,
+            Height: actualHeight,
+            Background: '0x' + args.BackColor.replace('#', ''),
+            Transparency: normalAlpha,
+            BorderSize: borderSize,
+            BorderColor: '0x' + args.Border.replace('#', ''),
+            BorderTransparency: normalAlpha
+        })
 
         // Make Text inside shape
         shapeText.anchor.set(0.5);
@@ -616,18 +695,18 @@ class App extends Component {
         this.currentRow = 1;
         this.currentIndex = 0;
 
-        Object.keys(this.currentTable['Rows']).forEach((curRow, index) => {
+        this.getObjectKeys(this.currentTable['Rows']).forEach((curRow, index) => {
             this.currentTable['Rows'][curRow].map(this.makeTableItem.bind(this))
         })
     }
 
     buildTableBetGrid() {
-        this.currentY = 15;
+        this.currentY = 0;
         this.currentX = 0;
         this.currentRow = 1;
         this.currentIndex = 0;
 
-        Object.keys(betTable['BetAreasRows']).forEach((curRow, index) => {
+        this.getObjectKeys(betTable['BetAreasRows']).forEach((curRow, index) => {
             betTable['BetAreasRows'][curRow].map(this.makeTableBetCell.bind(this))
         })
     }
