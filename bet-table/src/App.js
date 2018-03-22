@@ -67,7 +67,7 @@ class App extends Component {
     }
 
     setCipAmountMap(key, list) {
-        if(typeof list != "object"){
+        if (typeof list != "object") {
             throw new Error("setCipAmountMap requires key and list to assign")
             return
         }
@@ -87,7 +87,7 @@ class App extends Component {
     }
 
     setShapeMap(key, list) {
-        if(typeof list != "object"){
+        if (typeof list != "object") {
             throw new Error("setShapeMap requires key and list to assign")
             return
         }
@@ -99,39 +99,39 @@ class App extends Component {
     }
 
     setBetHistory(list) {
-        if(typeof list != "object"){
+        if (typeof list != "object") {
             throw new Error("setBetHistory accept 1 paramter as object")
             return
         }
         this.betHistory.push(list)
     }
 
-    destroyModel(models){
-        if(typeof models != "object"){
+    destroyModel(models) {
+        if (typeof models != "object") {
             throw new Error("DestroyModel accept 1 paramter as array - Use shapeMap.Chip")
             return
         }
-        if(models.length > 0) {
+        if (models.length > 0) {
             models.map(model => model.destroy())
         }
     }
 
-    getChipModel(shapeMap){
-        if(typeof shapeMap != "object"){
+    getChipModel(shapeMap) {
+        if (typeof shapeMap != "object") {
             throw new Error("getChipModel accept 1 paramter as array - Use shapeMap")
             return
         }
         return shapeMap.Chip;
     }
 
-    getChipImage(totalChipBet){
+    getChipImage(totalChipBet) {
         const chipPath = chipData.ChipPaths[String(totalChipBet)]
 
-        return chipPath ? chipPath: chipData.ChipPaths.defaultChip;
+        return chipPath ? chipPath : chipData.ChipPaths.defaultChip;
     }
 
-    getObjectKeys(obj){
-        if(typeof obj != "object"){
+    getObjectKeys(obj) {
+        if (typeof obj != "object") {
             throw new Error("getObjectKeys accept 1 paramter as object")
             return
         }
@@ -142,8 +142,8 @@ class App extends Component {
     // DRAW SHAPE
     //========================
     drawRectangle({
-                      Shape, LeftX, TopY, Width, Height, Background,Transparency, BorderSize, BorderColor, BorderTransparency = 1
-                  }){
+                      Shape, LeftX, TopY, Width, Height, Background, Transparency, BorderSize, BorderColor, BorderTransparency = 1
+                  }) {
         Shape.beginFill(Background, Transparency);
         Shape.lineStyle(BorderSize, BorderColor, BorderTransparency);
         Shape.drawRect(LeftX, TopY, Width, Height);
@@ -222,46 +222,46 @@ class App extends Component {
         })
     }
 
-    repeatBets(){
-        if(this.beforeRefreshHistory.length){
+    repeatBets() {
+        if (this.beforeRefreshHistory.length) {
 
             this.beforeRefreshHistory.map(bet => {
                 const universalKey = bet.MapKey;
 
-                if(universalKey){
+                if (universalKey) {
                     this.makeBet(this.getShapesMap(universalKey));
                 }
             })
         }
     }
 
-    doubleBets(){
-        if(this.beforeRefreshHistory.length){
+    doubleBets() {
+        if (this.beforeRefreshHistory.length) {
 
             this.beforeRefreshHistory.map(bet => {
                 const universalKey = bet.MapKey;
 
                 const chipMapped = this.getChipAmountMap(universalKey);
 
-                if(universalKey){
+                if (universalKey) {
                     this.makeBet(this.getShapesMap(universalKey));
                 }
             })
-        }else if(this.betHistory.length){
+        } else if (this.betHistory.length) {
 
             this.betHistory.map(bet => {
                 const universalKey = bet.MapKey;
 
                 const chipMapped = this.getChipAmountMap(universalKey);
 
-                if(universalKey){
+                if (universalKey) {
                     this.makeBet(this.getShapesMap(universalKey));
                 }
             })
         }
     }
 
-    makeBet(shapeMap){
+    makeBet(shapeMap) {
         const chipConfig = chipData.ChipTextConfig;
         const fontWeight = chipConfig.defaultWeight;
         const fontSize = chipConfig.defaultSize;
@@ -300,7 +300,7 @@ class App extends Component {
         if (chipModel && chipText && chipMapped.Amount > 0) {
             chipModel.texture = new PIXI.Texture.fromImage(chipPath)
             chipText.text = chipNewAmount;
-        } else if(chipModel && chipText) {
+        } else if (chipModel && chipText) {
 
             // ADD CHIP
             chipModel.width = chipWidth;
@@ -315,7 +315,7 @@ class App extends Component {
             chipText.anchor.set(0.5);
         }
 
-        if(chipModel && chipText) {
+        if (chipModel && chipText) {
             this.pixiTableDesign.stage.addChild(chipModel, chipText);
         }
 
@@ -339,13 +339,13 @@ class App extends Component {
     }
 
     switchTable(tableData, allowRefresh) {
-        if(tableData == this.currentTable)
+        if (tableData == this.currentTable)
             return;
 
         this.currentTable = tableData;
         this.beforeRefreshHistory = this.betHistory;
 
-        if(allowRefresh) {
+        if (allowRefresh) {
             this.clearBets();
             this.switchBuiltTable()
             this.repeatBets()
@@ -362,22 +362,22 @@ class App extends Component {
         const ShapeProperties = shapeMap.Shape
 
         this.drawRectangle({
-                Shape: ShapeCtx,
-                LeftX: ShapeProperties.X,
-                TopY: ShapeProperties.Y,
-                Width: ShapeProperties.Width,
-                Height: ShapeProperties.Height,
-                Background: ShapeProperties.HoverBackColor,
-                Transparency: ShapeProperties.HoverBackColorAlpha,
-                BorderSize: ShapeProperties.HoverBorderSize,
-                BorderColor: ShapeProperties.HoverBorderColor
+            Shape: ShapeCtx,
+            LeftX: ShapeProperties.X,
+            TopY: ShapeProperties.Y,
+            Width: ShapeProperties.Width,
+            Height: ShapeProperties.Height,
+            Background: ShapeProperties.HoverBackColor,
+            Transparency: ShapeProperties.HoverBackColorAlpha,
+            BorderSize: ShapeProperties.HoverBorderSize,
+            BorderColor: ShapeProperties.HoverBorderColor
         })
     }
 
     onShapeBetHoverOUT(event) {
         const shapeMap = event.currentTarget.shapeMap;
         const ShapeCtx = shapeMap.Shape.Graphic;
-        const ShapeProperties =  shapeMap.Shap;
+        const ShapeProperties = shapeMap.Shap;
 
         this.drawRectangle({
             Shape: ShapeCtx,
@@ -435,7 +435,7 @@ class App extends Component {
             highlightList[row].map(shapeId => {
                 const getShapeMapped = this.getShapesMap(shapeId);
                 const ShapeCtx = getShapeMapped.Shape.Graphic;
-                const ShapeProperties =  getShapeMapped.Shape;
+                const ShapeProperties = getShapeMapped.Shape;
 
                 this.drawRectangle({
                     Shape: ShapeCtx,
@@ -466,6 +466,11 @@ class App extends Component {
         const normalAlpha = args.BackColorAlpha || this.currentTable.defaultBackColorAlpha;
         const highlightList = args.Highlight ? args.Highlight : {};
         const betAreasRowsCells = betTable['BetAreasRows'][String(this.currentRow)].length || 0;
+        this.currentX = args.Cords && args.Cords.X >= 0 ? args.Cords.X - borderSize : this.currentX;
+        this.currentY = args.Cords && args.Cords.Y >= 0 ? args.Cords.Y - borderSize: this.currentY;
+        const hasCords = args.Cords && args.Cords.X >= 0  || args.Cords && args.Cords.Y >= 0 ? true:false
+        const tableWidth = this.currentTable.tableWidth || this.currentX;
+        const tableHeight = this.currentTable.tableHeight || this.currentY;
 
         // CALL BACKS
         // * Can use default callbacks or your own!
@@ -557,12 +562,20 @@ class App extends Component {
         const hoverBorderColor = args.HoverBorderColor || this.currentTable.defaultHoverBorderColor;
         const hoverAlpha = args.HoverBackColorAlpha || this.currentTable.defaultHoverBackColorAlpha;
         const highlightList = args.Highlight ? args.Highlight : {};
+        this.currentX = args.Cords && args.Cords.X >= 0 ? args.Cords.X - borderSize : this.currentX;
+        this.currentY = args.Cords && args.Cords.Y >= 0 ? args.Cords.Y - borderSize: this.currentY;
+        const hasCords = args.Cords && args.Cords.X >= 0  || args.Cords && args.Cords.Y >= 0 ? true:false
+        const tableWidth = this.currentTable.tableWidth || this.currentX;
+        const tableHeight = this.currentTable.tableHeight || this.currentY;
 
         // CALL BACKS
         // * Can use default callbacks or your own!
-        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : () => {};
-        const hoverInCallBack = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : () => {};
-        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : () => {};
+        const clickCallBack = args.Events && args.Events.Click ? this[String(args.Events.Click)] : () => {
+        };
+        const hoverInCallBack = args.Events && args.Events.HoverIN ? this[String(args.Events.HoverIN)] : () => {
+        };
+        const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : () => {
+        };
 
         const shapeStr = args.Text || "";
         const textHoriz = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
@@ -658,13 +671,21 @@ class App extends Component {
         shapeText.shapeMap = this.getShapesMap(mainShapeId);
 
         // Next X cord ->
-        this.currentX += actualWidth;
+        if(!hasCords) {
+            this.currentX += actualWidth;
+        }
         if (this.currentTable['MaxPerRow'][String(this.currentRow)] == this.currentIndex) {
-            this.currentY += actualHeight;
-            this.pixiTableDesign.view.setAttribute('width', this.currentX + "px");
-            this.pixiTableDesign.view.setAttribute('height', (this.currentY - (borderSize * this.currentTable['MaxPerRow'][String(this.currentRow)])) + "px");
+            if(!hasCords) {
+                this.currentY += actualHeight;
+            }
+            this.pixiTableDesign.view.setAttribute('width', tableWidth + "px");
+            this.pixiTableDesign.view.setAttribute('height', (tableHeight - (borderSize * this.currentTable['MaxPerRow'][String(this.currentRow)])) + "px");
+            //this.pixiTableDesign.view.setAttribute('width', "820px");
+            //this.pixiTableDesign.view.setAttribute('height', "295px");
             this.currentRow += 1;
-            this.currentX = 0;
+            if(!hasCords) {
+                this.currentX = 0;
+            }
             this.currentIndex = 0;
         }
     }
@@ -673,7 +694,7 @@ class App extends Component {
     // BUILD TABLE >>
     //======================================
 
-    switchBuiltTable(){
+    switchBuiltTable() {
         this.buildTableBackground();
         this.buildTableBetGrid();
     }
@@ -692,7 +713,7 @@ class App extends Component {
     buildTableBackground() {
         this.currentY = 0;
         this.currentX = 0;
-        this.currentRow = 1;
+        this.currentRow = 0;
         this.currentIndex = 0;
 
         this.getObjectKeys(this.currentTable['Rows']).forEach((curRow, index) => {
@@ -703,7 +724,7 @@ class App extends Component {
     buildTableBetGrid() {
         this.currentY = 0;
         this.currentX = 0;
-        this.currentRow = 1;
+        this.currentRow = 0;
         this.currentIndex = 0;
 
         this.getObjectKeys(betTable['BetAreasRows']).forEach((curRow, index) => {
@@ -714,7 +735,7 @@ class App extends Component {
     createPixiCanvas() {
 
         // create app pixi
-        this.pixiTableDesign = new PIXI.Application(900,295);
+        this.pixiTableDesign = new PIXI.Application(900, 295);
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         // render as webgl
         this.pixiTableDesignRender = new PIXI.WebGLRenderer({
@@ -768,7 +789,9 @@ class App extends Component {
                 <div className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</div>
                 <div className="repeatBet" onClick={this.doubleBets.bind(this)}>Double Bet</div>
                 <div className="switchClassic" onClick={this.switchTable.bind(this, classicTable)}>Switch Classic</div>
-                <div className="switchTransparent" onClick={this.switchTable.bind(this, transparentTable)}>Switch Transparent</div>
+                <div className="switchTransparent" onClick={this.switchTable.bind(this, transparentTable)}>Switch
+                    Transparent
+                </div>
             </div>
         );
     }
