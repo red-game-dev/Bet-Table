@@ -400,6 +400,14 @@ class App extends Component {
         this.makeBet(event.currentTarget.shapeMap)
     }
 
+    onChangeStatsClick(event) {
+        alert('Change stats')
+    }
+
+    onChangeRaceTrack(event){
+        alert('Change racetrack')
+    }
+
     multiBetHoverInShapes(event) {
         const shapeMap = event.currentTarget.shapeMap;
         const highlightList = shapeMap.HighlightShapes;
