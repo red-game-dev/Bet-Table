@@ -1,6 +1,6 @@
 {
   "Development": {
-    "IS_DEBUG_MODE": true,
+    "IS_DEBUG_MODE": false,
     "Grid": {
       "Background": "#66ccff",
       "BorderColor": "#04080c"
@@ -49,6 +49,11 @@
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#f9fbf5",
+        "Background":{
+          "Image":  "./Images/fbIcon.png",
+          "Width": 40,
+          "Height": 40
+        },
         "Size": {
           "Height": 147.5,
           "Width": 60
@@ -689,6 +694,11 @@
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#F9FBF5",
+        "Background":{
+          "Image":  "./Images/fbIcon.png",
+          "Width": 40,
+          "Height": 40
+        },
         "Size": {
           "Height": 60,
           "Width": 120
@@ -704,6 +714,11 @@
         "BackColor": "#0c0704",
         "TextColor": "white",
         "Border": "#F9FBF5",
+        "Background":{
+          "Image":  "./Images/fbIcon.png",
+          "Width": 40,
+          "Height": 40
+        },
         "Size": {
           "Height": 60,
           "Width": 120
@@ -796,6 +811,11 @@
         "BackColor": "#cb231f",
         "TextColor": "white",
         "Border": "#f9fbf5",
+        "Background":{
+          "Image":  "./Images/fbIcon.png",
+          "Width": 40,
+          "Height": 40
+        },
         "Size": {
           "Height": 116,
           "Width": 60

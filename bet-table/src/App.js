@@ -44,6 +44,7 @@ class App extends Component {
         this.chipAmountMap = {}
         this.betHistory = [];
         this.beforeRefreshHistory = [];
+        this.saveBetsList = [];
         this.currentTable = null;
     }
 
@@ -71,7 +72,12 @@ class App extends Component {
             throw new Error("setCipAmountMap requires key and list to assign")
             return
         }
-        this.chipAmountMap[String(key).replace(' ', '_')] = list
+
+        if(this.chipAmountMap[String(key).replace(' ', '_')]) {
+            Object.assign(this.chipAmountMap[String(key).replace(' ', '_')], list)
+        }else{
+            this.chipAmountMap[String(key).replace(' ', '_')] = list;
+        }
     }
 
     getChipValue() {
@@ -197,29 +203,30 @@ class App extends Component {
     }
 
     clearBets() {
-        const betHistory = this.betHistory;
-        this.betHistory = [];
-
-        betHistory.map(currentBet => {
-            if (currentBet.MapKey) {
-                const universalKey = currentBet.MapKey;
-                const shapeMapped = this.getShapesMap(universalKey)
-                const Models = this.getChipModel(shapeMapped);
-
-                if (Models) {
-                    this.destroyModel([
-                        Models.ChipText,
-                        Models.ChipModel
-                    ])
-
-                    const newShapeMapped = Object.assign(Models, {});
-                    this.setShapeMap(universalKey, newShapeMapped)
-                    this.setCipAmountMap(universalKey, {
-                        Amount: 0
-                    })
-                }
-            }
-        })
+        //const betHistory = this.betHistory;
+        //this.betHistory = [];
+        // betHistory.map(currentBet => {
+        //     if (currentBet.MapKey) {
+        //         const universalKey = currentBet.MapKey;
+        //         const shapeMapped = this.getShapesMap(universalKey)
+        //         const Models = this.getChipModel(shapeMapped);
+        //
+        //         if (Models) {
+        //             this.destroyModel([
+        //                 Models.ChipText,
+        //                 Models.ChipModel
+        //             ])
+        //
+        //             const newShapeMapped = Object.assign(Models, {})
+        //             this.setShapeMap(universalKey, newShapeMapped)
+        //
+        //             this.setCipAmountMap(universalKey, {
+        //                 Amount: 0
+        //             })
+        //         }
+        //     }
+        // })
+        this.buildTable();
     }
 
     repeatBets() {
@@ -241,8 +248,6 @@ class App extends Component {
             this.beforeRefreshHistory.map(bet => {
                 const universalKey = bet.MapKey;
 
-                const chipMapped = this.getChipAmountMap(universalKey);
-
                 if (universalKey) {
                     this.makeBet(this.getShapesMap(universalKey));
                 }
@@ -252,7 +257,21 @@ class App extends Component {
             this.betHistory.map(bet => {
                 const universalKey = bet.MapKey;
 
-                const chipMapped = this.getChipAmountMap(universalKey);
+                if (universalKey) {
+                    this.makeBet(this.getShapesMap(universalKey));
+                }
+            })
+        }
+    }
+
+    saveBets(listIndex) {
+        this.saveBetsList[listIndex] = this.betHistory;
+    }
+
+    placeSavedBets(listIndex){
+        if(this.saveBetsList.length && this.saveBetsList[listIndex].length) {
+            this.saveBetsList[listIndex].map(bet => {
+                const universalKey = bet.MapKey;
 
                 if (universalKey) {
                     this.makeBet(this.getShapesMap(universalKey));
@@ -575,6 +594,11 @@ class App extends Component {
         const hasCords = args.Cords && args.Cords.X >= 0  || args.Cords && args.Cords.Y >= 0 ? true:false
         const tableWidth = this.currentTable.tableWidth || this.currentX;
         const tableHeight = this.currentTable.tableHeight || this.currentY;
+        const shapeBackground = args.Background && args.Background.Image ? args.Background && args.Background.Image : false;
+        const shapeImageWidth = args.Background && args.Background.Width ? args.Background.Width : actualWidth / 2;
+        const shapeImageHeight = args.Background && args.Background.Height ? args.Background.Height : actualHeight / 2;
+        const shapeImageX = ((this.currentX - borderSize) + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2));
+        const shapeImageY = (this.currentY - borderSize) + (actualHeight / 2);
 
         // CALL BACKS
         // * Can use default callbacks or your own!
@@ -584,6 +608,7 @@ class App extends Component {
         };
         const hoverOUTCallBack = args.Events && args.Events.HoverOUT ? this[String(args.Events.HoverOUT)] : () => {
         };
+
 
         const shapeStr = args.Text || "";
         const textHoriz = (this.currentX + ((actualWidth + ((fontSize + fontThickness) / 2)) / 2))
@@ -606,6 +631,7 @@ class App extends Component {
         const getPreviousShapeMap = this.getShapesMap(mainShapeId);
 
         const Shape = (getPreviousShapeMap && getPreviousShapeMap.Shape.Graphic) ? getPreviousShapeMap.Shape.Graphic : new PIXI.Graphics();
+        const ShapeImage = (shapeBackground) ? new PIXI.Sprite.fromImage(shapeBackground) : false
         const shapeText = (getPreviousShapeMap && getPreviousShapeMap.Text.TextObj) ? getPreviousShapeMap.Text.TextObj : new PIXI.Text(shapeStr, textConfig);
 
         // Make Shape
@@ -621,6 +647,15 @@ class App extends Component {
             BorderColor: '0x' + args.Border.replace('#', ''),
             BorderTransparency: normalAlpha
         })
+
+
+        if(ShapeImage) {
+            ShapeImage.width = shapeImageWidth;
+            ShapeImage.height = shapeImageHeight;
+            ShapeImage.x = shapeImageX;
+            ShapeImage.y = shapeImageY;
+            ShapeImage.anchor.set(0.5);
+        }
 
         // Make Text inside shape
         shapeText.anchor.set(0.5);
@@ -640,7 +675,11 @@ class App extends Component {
         Shape
             .on('pointerout', hoverOUTCallBack.bind(this));
 
-        this.pixiTableDesign.stage.addChild(Shape, shapeText);
+        if(ShapeImage) {
+            this.pixiTableDesign.stage.addChild(Shape, ShapeImage, shapeText);
+        }else{
+            this.pixiTableDesign.stage.addChild(Shape, shapeText);
+        }
 
         // This is required to map all shapes
         this.setShapeMap(mainShapeId, {
@@ -661,6 +700,12 @@ class App extends Component {
                 HoverBackColorAlpha: hoverAlpha,
                 HoverBorderColor: '0x' + hoverBorderColor.replace('#', ''),
                 Graphic: Shape
+            },
+            ShapeImage: {
+                Width: shapeImageWidth,
+                Height: shapeImageHeight,
+                X: shapeImageX,
+                Y: shapeImageY,
             },
             Text: {
                 String: shapeStr,
@@ -792,13 +837,21 @@ class App extends Component {
 
         return (
             <div id="App" className="App">
-                <div className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</div>
-                <div className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</div>
-                <div className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</div>
-                <div className="repeatBet" onClick={this.doubleBets.bind(this)}>Double Bet</div>
-                <div className="switchClassic" onClick={this.switchTable.bind(this, classicTable)}>Switch Classic</div>
-                <div className="switchTransparent" onClick={this.switchTable.bind(this, transparentTable)}>Switch
-                    Transparent
+                <button className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</button>
+                <button className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</button>
+                <button className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</button>
+                <button className="repeatBet" onClick={this.doubleBets.bind(this)}>Double Bet</button>
+                <button className="switchClassic" onClick={this.switchTable.bind(this, classicTable)}>Switch Classic</button>
+                <button className="switchTransparent" onClick={this.switchTable.bind(this, transparentTable)}>Switch Transparent</button>
+                <div className="saveBetList" >
+                    <button className="saveBets-1" onClick={this.saveBets.bind(this, 1)}>Save Bets 1</button>
+                    <button className="saveBets-2" onClick={this.saveBets.bind(this, 2)}>Save Bets 2</button>
+                    <button className="saveBets-3" onClick={this.saveBets.bind(this, 3)}>Save Bets 3</button>
+                </div>
+                <div className="placeBets-savedBetsList" >
+                    <button className="placeBets-savedBets-1" onClick={this.placeSavedBets.bind(this, 1)}>Plave Saved Bets 1</button>
+                    <button className="placeBets-savedBets-2" onClick={this.placeSavedBets.bind(this, 2)}>Plave Saved Bets 2</button>
+                    <button className="placeBets-savedBets-3" onClick={this.placeSavedBets.bind(this, 3)}>Plave Saved Bets 3</button>
                 </div>
             </div>
         );
