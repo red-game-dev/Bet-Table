@@ -60,6 +60,58 @@ class App extends Component {
     }
 
     //================================
+    // UTILS
+    //===============================
+    showMessage(msg, type){
+        const messageArea = document.getElementsByClassName('sgMessageBox')[0]
+
+        messageArea.classList.add(type)
+        messageArea.innerHTML = msg;
+
+        setTimeout(() => this.hideMessage(), 2500);
+    }
+
+    hideMessage(){
+        const messageArea = document.getElementsByClassName('sgMessageBox')[0]
+
+        messageArea.classList.remove("critical")
+        messageArea.classList.remove("warning")
+        messageArea.innerHTML = "";
+    }
+
+
+    //================================
+    // VALIDATE BET
+    //================================
+    validateBet(betAmount){
+        if(!betAmount)
+            return {
+                allowBet: false,
+                msg: "undefined bets"
+            }
+
+        const maxBet = betTable.BetAreasConfig.MaxBets;
+        const minBet = betTable.BetAreasConfig.MinBets;
+
+        if(betAmount > maxBet){
+            return {
+                allowBet: false,
+                msg: "Max bet is " + maxBet
+            }
+        }else if(betAmount < minBet){
+            return {
+                allowBet: false,
+                msg: "Min bet is " + minBet
+            }
+        }
+
+        return {
+            allowBet: true,
+            msg: "Bets has been placed!"
+        }
+    }
+
+    //================================
     // GETTERS Obj; AND SETTERS Obj;
     //================================
 
@@ -280,6 +332,13 @@ class App extends Component {
         }
     }
 
+    placeSpecailBet(Id){
+        const currentSpecailBet = betTable.SpecialBets
+            .filter(specailBet => specailBet.Id == Id)
+
+        currentSpecailBet.BetsAreas.map(betAreaKey => this.makeBet(this.getShapesMap(betAreaKey)));
+    }
+
     makeBet(shapeMap) {
         const chipConfig = chipData.ChipTextConfig;
         const fontWeight = chipConfig.defaultWeight;
@@ -297,6 +356,13 @@ class App extends Component {
         const chipNewAmount = chipMapped.Amount + chipAmount;
 
         const chipPath = this.getChipImage(chipNewAmount);
+
+        const isValidBet = this.validateBet(chipNewAmount);
+
+        if(!isValidBet.allowBet){
+            this.showMessage(isValidBet.msg, 'critical')
+            return;
+        }
 
         const chipModel = shapeMap.Chip ? shapeMap.Chip.ChipModel : new PIXI.Sprite.fromImage(chipPath);
         const chipText = shapeMap.Chip ? shapeMap.Chip.ChipText : new PIXI.Text(String(chipAmount), {
@@ -319,6 +385,17 @@ class App extends Component {
         if (chipModel && chipText && chipMapped.Amount > 0) {
             chipModel.texture = new PIXI.Texture.fromImage(chipPath)
             chipText.text = chipNewAmount;
+            // ADD CHIP
+            chipModel.width = chipWidth;
+            chipModel.height = chipHeight;
+            chipModel.x = chipX;
+            chipModel.y = chipY;
+
+            chipText.x = chipX;
+            chipText.y = chipY;
+
+            chipModel.anchor.set(0.5)
+            chipText.anchor.set(0.5);
         } else if (chipModel && chipText) {
 
             // ADD CHIP
@@ -853,6 +930,11 @@ class App extends Component {
                     <button className="placeBets-savedBets-2" onClick={this.placeSavedBets.bind(this, 2)}>Plave Saved Bets 2</button>
                     <button className="placeBets-savedBets-3" onClick={this.placeSavedBets.bind(this, 3)}>Plave Saved Bets 3</button>
                 </div>
+                <div className="special-bets-list">
+                    {betTable.SpecialBets.map(specialBet => <button className={`specailBet-${specialBet.Name}`} onClick={this.placeSpecailBet.bind(this, specialBet.Id)} >{specialBet.Name}</button>)}
+                </div>
+
+                <div className="sgMessageBox message-area message"></div>
             </div>
         );
     }

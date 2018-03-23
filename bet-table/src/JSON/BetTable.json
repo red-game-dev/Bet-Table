@@ -1,8 +1,27 @@
 {
   "BetAreasConfig": {
     "BetAreasRows": 21,
-    "BetAreasRowsCells": 21
+    "BetAreasRowsCells": 21,
+    "MaxBets": 400,
+    "MinBets": 100
   },
+  "SpecialBets": [
+    {
+      "Id": 1,
+      "Name": "Nassa",
+      "ChipsAmount": 5,
+      "BetsAreas": [
+        "betArea_0",
+        "betArea_1",
+        "betArea_4",
+        "betArea_5",
+        "betArea_23",
+        "betArea_24",
+        "betArea_31",
+        "betArea_33"
+      ]
+    }
+  ],
   "BetAreasRows": {
     "0": [
       {
@@ -4853,7 +4872,7 @@
           "HoverOUT": "multiBetHoverOutShapes"
         },
         "Highlight": {
-          "0": [],
+          "0": [1,2,3,4,5,6,7,8,9,10,11,12],
           "1": [],
           "2": [],
           "3": [],
@@ -4880,7 +4899,7 @@
         },
         "Highlight": {
           "0": [],
-          "1": [],
+          "1": [13,14,15,16,17,18,19,20,21,22,23,24],
           "2": [],
           "3": [],
           "4": [],
@@ -4907,7 +4926,7 @@
         "Highlight": {
           "0": [],
           "1": [],
-          "2": [],
+          "2": [25,26,27,28,29,30,31,32,33,34,35,36],
           "3": [],
           "4": [],
           "5": [],
