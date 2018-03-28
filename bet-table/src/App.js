@@ -559,8 +559,7 @@ class App extends Component {
     onShapeBetClick(event) {
         if (!this.getChipValue()) {
             return;
-        }
-
+        }        
         this.makeBet(event.currentTarget.shapeMap)
     }
 
@@ -1006,7 +1005,7 @@ class App extends Component {
             legacy: true,
         })
         //setup interactions by 1s delay
-        this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesignRender, {
+        this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesign, {
             interactionFrequency: 1000
         })
 
@@ -1035,6 +1034,11 @@ class App extends Component {
         return app;
     }
 
+    eventClick(event){
+        console.log("test", event)
+
+    }
+
     //======================================
     // RENDER IT
     //======================================
@@ -1043,8 +1047,9 @@ class App extends Component {
         this.switchWinningIcon(betTable.WinningIcon)
         this.switchTable(classicTable, false);
 
+
         return (
-            <div id="App" className="App">
+            <div id="App" className="App" onClick={this.eventClick.bind(this)}>
                 <button className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</button>
                 <button className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</button>
                 <button className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</button>
