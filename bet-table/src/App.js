@@ -240,8 +240,8 @@ class App extends Component {
                         Models.ChipText
                     ]);
 
-                    const newShapeMapped = Object.assign(Models, {});
-                    this.setShapeMap(universalKey, newShapeMapped)
+                    shapeMapped.Chip = null;
+                    this.setShapeMap(universalKey, shapeMapped)
                     this.setCipAmountMap(universalKey, {
                         Amount: 0
                     })
@@ -256,32 +256,29 @@ class App extends Component {
     }
 
     clearBets() {
-        //const betHistory = this.betHistory;
-        //this.betHistory = [];
-        // betHistory.map(currentBet => {
-        //     if (currentBet.MapKey) {
-        //         const universalKey = currentBet.MapKey;
-        //         const shapeMapped = this.getShapesMap(universalKey)
-        //         const Models = this.getChipModel(shapeMapped);
-        //
-        //         if (Models) {
-        //             this.destroyModel([
-        //                 Models.ChipText,
-        //                 Models.ChipModel
-        //             ])
-        //
-        //             const newShapeMapped = Object.assign(Models, {})
-        //             this.setShapeMap(universalKey, newShapeMapped)
-        //
-        //             this.setCipAmountMap(universalKey, {
-        //                 Amount: 0
-        //             })
-        //         }
-        //     }
-        // })
         this.beforeRefreshHistory = this.betHistory;
+        this.betHistory = [];
+        this.beforeRefreshHistory.map(currentBet => {
+            if (currentBet.MapKey) {
+                const universalKey = currentBet.MapKey;
+                const shapeMapped = this.getShapesMap(universalKey)
+                const Models = this.getChipModel(shapeMapped);
 
-        this.buildTable();
+                if (Models) {
+                    this.destroyModel([
+                        Models.ChipText,
+                        Models.ChipModel
+                    ])
+
+                    shapeMapped.Chip = null;
+                    this.setShapeMap(universalKey, shapeMapped)
+
+                    this.setCipAmountMap(universalKey, {
+                        Amount: 0
+                    })
+                }
+            }
+        })
     }
 
     repeatBets() {
@@ -348,7 +345,7 @@ class App extends Component {
             const winningFont = this.currentWinIcon.Font;
             const winningText = new PIXI.Text(String(winAmount),winningFont);
 
-            const winningTicker = new PIXI.ticker.Ticker();
+            //const winningTicker = new PIXI.ticker.Ticker();
 
             const winningImgWidth = (ShapeProperties.Width + this.currentWinIcon.ExtraWidth);
             const winningImgHeight = (ShapeProperties.Height + this.currentWinIcon.ExtraHeight);
@@ -370,33 +367,33 @@ class App extends Component {
             winningText.x = winningTextX;
             winningText.y = winningTextY;
             winningText.anchor.set(0.5);
-            winningTicker.autoStart = true;
-
-            winningTicker.add((delta) => {
-                if(isIncreaseMode) {
-                    isIncreaseMode = false;
-
-                    winningShape.width += 1 * delta;
-                    winningShape.height += 1 * delta;
-                    winningText.fontSize += 1 * delta;
-                }else {
-                    isIncreaseMode = true;
-
-                    winningShape.width -= 1 * delta;
-                    winningShape.height -= 1 * delta;
-                    winningText.fontSize -= 1 * delta;
-                }
-            })
-
-            winningTicker.start();
+            // winningTicker.autoStart = true;
+            //
+            // winningTicker.add((delta) => {
+            //     if(isIncreaseMode) {
+            //         isIncreaseMode = false;
+            //
+            //         winningShape.width += 1 * delta;
+            //         winningShape.height += 1 * delta;
+            //         winningText.fontSize += 1 * delta;
+            //     }else {
+            //         isIncreaseMode = true;
+            //
+            //         winningShape.width -= 1 * delta;
+            //         winningShape.height -= 1 * delta;
+            //         winningText.fontSize -= 1 * delta;
+            //     }
+            // })
+            //
+            // winningTicker.start();
 
             setTimeout(() => {
-                winningTicker.stop();
+               // winningTicker.stop();
 
                 this.clearBets();
 
                 this.destroyModel([
-                    winningTicker,
+                //    winningTicker,
                     winningShape,
                     winningText
                 ])
@@ -982,17 +979,33 @@ class App extends Component {
     createPixiCanvas() {
 
         // create app pixi
-        this.pixiTableDesign = new PIXI.Application(900, 295);
+        this.pixiTableDesign = new PIXI.Application(this.currentTable.tableWidth, this.currentTable.tableHeight, {
+            antialias: true,
+            autoResize:true,
+            resolution: 1,
+            transparent: true,
+            powerPreference: "high-performance",
+            forceFXAA: true,
+            forceCanvas: true,
+            clearBeforeRender: true,
+            legacy: true,
+        });
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         // render as webgl
         this.pixiTableDesignRender = new PIXI.WebGLRenderer({
-            width: 900,
-            height: 295,
-            resolution: "16:9",
-            autoResize: true,
-            transparent: true
+            width: this.currentTable.tableWidth,
+            height: this.currentTable.tableHeight,
+            antialias: true,
+            autoResize:true,
+            resolution: 1,
+            transparent: true,
+            powerPreference: "high-performance",
+            forceFXAA: true,
+            forceCanvas: true,
+            clearBeforeRender: true,
+            legacy: true,
         })
-        // setup interactions by 1s delay
+        //setup interactions by 1s delay
         this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesignRender, {
             interactionFrequency: 1000
         })
