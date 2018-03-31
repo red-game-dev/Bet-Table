@@ -47,6 +47,7 @@ class App extends Component {
         this.saveBetsList = [];
         this.currentTable = null;
         this.currentWinIcon = null;
+        this.stopRenderTimeout = 0;
     }
 
     //================================
@@ -246,6 +247,8 @@ class App extends Component {
                         Amount: 0
                     })
                 }
+
+                this.beginRender();
             }
 
             const getIndex = this.betHistory.indexOf(lastBet)
@@ -277,6 +280,8 @@ class App extends Component {
                         Amount: 0
                     })
                 }
+
+                this.beginRender();
             }
         })
     }
@@ -330,20 +335,20 @@ class App extends Component {
         currentSpecailBet.BetsAreas.map(betAreaKey => this.makeBet(this.getShapesMap(betAreaKey)));
     }
 
-    showWinningNum({betShapeId, winAmount}){
-        if(!betShapeId || !this.currentWinIcon)
+    showWinningNum({betShapeId, winAmount}) {
+        if (!betShapeId || !this.currentWinIcon)
             return;
 
         const shapeMap = this.getShapesMap(betShapeId);
 
-        if(shapeMap) {
+        if (shapeMap) {
             const ShapeProperties = shapeMap.Shape;
 
             const winningImg = this.currentWinIcon.Background;
             const winningShape = new PIXI.Sprite.fromImage(winningImg);
 
             const winningFont = this.currentWinIcon.Font;
-            const winningText = new PIXI.Text(String(winAmount),winningFont);
+            const winningText = new PIXI.Text(String(winAmount), winningFont);
 
             //const winningTicker = new PIXI.ticker.Ticker();
 
@@ -388,22 +393,22 @@ class App extends Component {
             // winningTicker.start();
 
             setTimeout(() => {
-               // winningTicker.stop();
+                // winningTicker.stop();
 
                 this.clearBets();
 
                 this.destroyModel([
-                //    winningTicker,
+                    //    winningTicker,
                     winningShape,
                     winningText
                 ])
             }, 5000)
 
-            if(winningShape && winningText) {
+            if (winningShape && winningText) {
                 this.pixiTableDesign.stage.addChild(winningShape, winningText)
             }
 
-
+            this.beginRender();
         }
     }
 
@@ -500,6 +505,8 @@ class App extends Component {
         this.setCipAmountMap(universalKey, {
             Amount: chipNewAmount
         })
+
+        this.beginRender();
     }
 
     switchTable(tableData, allowRefresh) {
@@ -536,6 +543,8 @@ class App extends Component {
             BorderSize: ShapeProperties.HoverBorderSize,
             BorderColor: ShapeProperties.HoverBorderColor
         })
+
+        this.beginRender();
     }
 
     onShapeBetHoverOUT(event) {
@@ -554,12 +563,14 @@ class App extends Component {
             BorderSize: ShapeProperties.NormalBorderSize,
             BorderColor: ShapeProperties.NormalBorderColor
         })
+
+        this.beginRender();
     }
 
     onShapeBetClick(event) {
         if (!this.getChipValue()) {
             return;
-        }        
+        }
         this.makeBet(event.currentTarget.shapeMap)
     }
 
@@ -596,6 +607,8 @@ class App extends Component {
 
             })
         })
+
+        this.beginRender();
     }
 
     multiBetHoverOutShapes(event) {
@@ -621,6 +634,8 @@ class App extends Component {
                 })
             })
         })
+
+        this.beginRender();
     }
 
     specialBetsHoverIn(highlightList) {
@@ -642,6 +657,8 @@ class App extends Component {
                 BorderColor: ShapeProperties.HoverBorderColor
             })
         })
+
+        this.beginRender();
     }
 
     specialBetsHoverOut(highlightList) {
@@ -663,6 +680,8 @@ class App extends Component {
                 BorderColor: ShapeProperties.NormalBorderColor
             })
         })
+
+        this.beginRender();
     }
 
     //======================================
@@ -919,8 +938,7 @@ class App extends Component {
             }
             this.pixiTableDesign.view.setAttribute('width', tableWidth + "px");
             this.pixiTableDesign.view.setAttribute('height', (tableHeight - (borderSize * this.currentTable['MaxPerRow'][String(this.currentRow)])) + "px");
-            //this.pixiTableDesign.view.setAttribute('width', "820px");
-            //this.pixiTableDesign.view.setAttribute('height', "295px");
+            ;
             this.currentRow += 1;
             if (!hasCords) {
                 this.currentX = 0;
@@ -938,7 +956,7 @@ class App extends Component {
         this.buildTableBetGrid();
     }
 
-    switchWinningIcon(winIcon){
+    switchWinningIcon(winIcon) {
         this.currentWinIcon = winIcon;
     }
 
@@ -952,6 +970,20 @@ class App extends Component {
         this.buildTableBackground();
         this.buildTableBetGrid();
     }
+
+    beginRender() {
+        // Don't start rendering until the graphic is uploaded to the GPU
+        this.pixiTableDesign.renderer.plugins.prepare.upload(this.pixiTableDesign.stage, () => {
+            clearTimeout(this.stopRenderTimeout);
+            this.pixiTicker.start();
+            console.log('Cursor is on canvas - Start ticker process')
+            // start again after is done
+            this.stopRenderTimeout = setTimeout(() => {
+                this.pixiTicker.stop();
+                console.log('Cursor no longer on canvas - Stop ticker process')
+            }, betTable.CanvasStopTime)
+        });
+    } 
 
     buildTableBackground() {
         this.currentY = 0;
@@ -980,33 +1012,36 @@ class App extends Component {
         // create app pixi
         this.pixiTableDesign = new PIXI.Application(this.currentTable.tableWidth, this.currentTable.tableHeight, {
             antialias: true,
-            autoResize:true,
+            autoResize: true,
             resolution: 1,
             transparent: true,
-            powerPreference: "high-performance",
             forceFXAA: true,
             forceCanvas: true,
-            clearBeforeRender: true,
+            clearBeforeRender: false,
             legacy: true,
         });
+
+        this.pixiTicker = PIXI.ticker.shared;
+        this.pixiTicker.autoStart = false
+        this.pixiTicker.stop();
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
         // render as webgl
         this.pixiTableDesignRender = new PIXI.WebGLRenderer({
             width: this.currentTable.tableWidth,
             height: this.currentTable.tableHeight,
             antialias: true,
-            autoResize:true,
+            autoResize: true,
             resolution: 1,
             transparent: true,
-            powerPreference: "high-performance",
             forceFXAA: true,
             forceCanvas: true,
-            clearBeforeRender: true,
+            clearBeforeRender: false,
             legacy: true,
         })
         //setup interactions by 1s delay
         this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesign, {
-            interactionFrequency: 1000
+            interactionFrequency: 800
         })
 
         const TableContainer = document.querySelector('#App')
@@ -1015,6 +1050,8 @@ class App extends Component {
 
         // Make Design Canvas
         TableContainer.appendChild(TableDesign.view);
+
+        this.beginRender()
     }
 
     //======================================
@@ -1034,11 +1071,6 @@ class App extends Component {
         return app;
     }
 
-    eventClick(event){
-        console.log("test", event)
-
-    }
-
     //======================================
     // RENDER IT
     //======================================
@@ -1049,7 +1081,7 @@ class App extends Component {
 
 
         return (
-            <div id="App" className="App" onClick={this.eventClick.bind(this)}>
+            <div id="App" className="App">
                 <button className="clearBets" onClick={this.clearBets.bind(this)}>Clear Bets</button>
                 <button className="undoBet" onClick={this.undoBets.bind(this)}>Undo Bet</button>
                 <button className="repeatBet" onClick={this.repeatBets.bind(this)}>Repeat Bet</button>
