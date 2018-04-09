@@ -1,5 +1,5 @@
 {
-  "CanvasStopTime": 2500,
+  "CanvasStopTime": 50,
   "WinningIcon": {
     "Background": "./Images/winBack.png",
     "Font": {

@@ -972,14 +972,14 @@ class App extends Component {
     }
 
     beginRender() {
+        clearTimeout(this.stopRenderTimeout);
+        this.pixiTableDesign.start();
         // Don't start rendering until the graphic is uploaded to the GPU
         this.pixiTableDesign.renderer.plugins.prepare.upload(this.pixiTableDesign.stage, () => {
-            clearTimeout(this.stopRenderTimeout);
-            this.pixiTicker.start();
             console.log('Cursor is on canvas - Start ticker process')
-            // start again after is done
+            // // start again after is done
             this.stopRenderTimeout = setTimeout(() => {
-                this.pixiTicker.stop();
+                this.pixiTableDesign.stop();
                 console.log('Cursor no longer on canvas - Stop ticker process')
             }, betTable.CanvasStopTime)
         });
@@ -1021,28 +1021,10 @@ class App extends Component {
             legacy: true,
         });
 
-        this.pixiTicker = PIXI.ticker.shared;
-        this.pixiTicker.autoStart = false
-        this.pixiTicker.stop();
+        //this.pixiTicker = PIXI.ticker.shared;
+        this.pixiTableDesign.autoStart = false;
+        this.pixiTableDesign.stop();
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-
-        // render as webgl
-        this.pixiTableDesignRender = new PIXI.WebGLRenderer({
-            width: this.currentTable.tableWidth,
-            height: this.currentTable.tableHeight,
-            antialias: true,
-            autoResize: true,
-            resolution: 1,
-            transparent: true,
-            forceFXAA: true,
-            forceCanvas: true,
-            clearBeforeRender: false,
-            legacy: true,
-        })
-        //setup interactions by 1s delay
-        this.interactionMGR = new PIXI.interaction.InteractionManager(this.pixiTableDesign, {
-            interactionFrequency: 800
-        })
 
         const TableContainer = document.querySelector('#App')
 
